@@ -5,6 +5,7 @@ module.exports = {
     walk: async (parent, args) =>
       await Walk.findOne({ walkNumber: parent.walkNumber })
   },
+
   Query: {
     pilgrim: async (parent, { id }) => await Pilgrim.findById(id),
     pilgrims: async () => await Pilgrim.find({})
@@ -14,6 +15,16 @@ module.exports = {
     addPilgrim: async (parent, args, context, info) => {
       const pilgrim = new Pilgrim({ ...args });
       return await pilgrim.save();
+    },
+    updatePilgrim: async (parent, args, context, info) => {
+      const { id, ...updatedProperties } = args;
+      const [err, updatedPilgrim] = await Pilgrim.findByIdAndUpdate(id, {
+        $set: { ...updatedProperties }
+      });
+      if (err) {
+        throw new Error(err);
+      }
+      return updatedPilgrim;
     },
     removePilgrim: async (parent, { id }, context, info) => {
       const removedPilgrim = await Pilgrim.findByIdAndRemove(id);

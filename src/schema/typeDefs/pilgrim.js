@@ -24,6 +24,14 @@ module.exports = gql`
       sponsor: String
       walkNumber: Int!
     ): Pilgrim
+    updatePilgrim(
+      id: ID!
+      firstName: String
+      lastName: String
+      hometown: String
+      sponsor: String
+      walkNumber: Int
+    ): Pilgrim
     removePilgrim(id: ID!): Pilgrim
   }
 `;

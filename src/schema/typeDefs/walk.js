@@ -22,6 +22,13 @@ module.exports = gql`
       startDate: String
       endDate: String
     ): Walk!
+    updateWalk(
+      id: ID!
+      walkNumber: Int
+      gender: String
+      startDate: String
+      endDate: String
+    ): Walk
     removeWalk(id: ID!): Walk
   }
 `;

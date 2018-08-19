@@ -14,12 +14,10 @@ module.exports = mongoose.model(
         default: 'Men'
       },
       startDate: {
-        type: Date,
-        required: true
+        type: String
       },
       endDate: {
-        type: Date,
-        required: true
+        type: String
       }
     },
     {
