@@ -12,6 +12,9 @@ module.exports = mongoose.model(
       password: {
         type: String,
         required: true
+      },
+      admin: {
+        type: Boolean
       }
     },
     {

@@ -7,16 +7,34 @@ module.exports = {
   },
 
   Query: {
-    pilgrim: async (parent, { id }) => await Pilgrim.findById(id),
-    pilgrims: async () => await Pilgrim.find({})
+    pilgrim: async (parent, { id }, { user }) => {
+      if (!user) {
+        throw new Error('Not authorized');
+      }
+      return await Pilgrim.findById(id);
+    },
+    pilgrims: async (parent, args, { user }) => {
+      if (!user) {
+        throw new Error('Not authorized');
+      }
+      return await Pilgrim.find({});
+    }
   },
 
   Mutation: {
-    addPilgrim: async (parent, args, context, info) => {
+    addPilgrim: async (parent, args, { user }, info) => {
+      if (!user.admin) {
+        throw new Error('Not authorized');
+      }
+
       const pilgrim = new Pilgrim({ ...args });
       return await pilgrim.save();
     },
-    updatePilgrim: async (parent, args, context, info) => {
+    updatePilgrim: async (parent, args, { user }, info) => {
+      if (!user.admin) {
+        throw new Error('Not authorized');
+      }
+
       const { id, ...updatedProperties } = args;
       const [err, updatedPilgrim] = await Pilgrim.findByIdAndUpdate(id, {
         $set: { ...updatedProperties }
@@ -26,7 +44,11 @@ module.exports = {
       }
       return updatedPilgrim;
     },
-    removePilgrim: async (parent, { id }, context, info) => {
+    removePilgrim: async (parent, { id }, { user }, info) => {
+      if (!user.admin) {
+        throw new Error('Not authorized');
+      }
+
       const removedPilgrim = await Pilgrim.findByIdAndRemove(id);
       if (!removedPilgrim) {
         throw new Error('Pilgrim not found');

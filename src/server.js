@@ -1,8 +1,10 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const faker = require('faker');
+const jwt = require('jsonwebtoken');
 const { ApolloServer } = require('apollo-server');
 const { typeDefs, resolvers } = require('./schema');
+
+const { User } = require('./models');
 
 dotenv.config();
 mongoose
@@ -17,17 +19,51 @@ mongoose
       }
     };
 
-    const mocks = {
-      Int: () => faker.random.number(100)
-    };
-
     return new ApolloServer({
       typeDefs,
       resolvers,
-      playground
+      playground,
+      context: async ({ req }) => {
+        // get the user token from the headers
+        const authorization = req.headers.authorization || '';
+        const bearerLength = 'Bearer '.length;
+        const token = authorization.slice(bearerLength);
+
+        // try to retrieve a user with the token
+        const user = await getUser(token);
+
+        // add the user to the context
+        return { user };
+      }
     }).listen();
   })
   .then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
   })
   .catch(console.error);
+
+const getUser = async token => {
+  const { ok, result } = await new Promise(resolve =>
+    jwt.verify(token, process.env.JWT_SECRET, (err, result) => {
+      if (err) {
+        resolve({
+          ok: false,
+          result: err
+        });
+      } else {
+        resolve({
+          ok: true,
+          result
+        });
+      }
+    })
+  );
+
+  if (ok) {
+    const user = await User.findById(result.id);
+    return user;
+  } else {
+    console.error(result);
+    return null;
+  }
+};

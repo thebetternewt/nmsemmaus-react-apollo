@@ -7,19 +7,35 @@ module.exports = {
   },
 
   Query: {
-    walk: async (parent, { walkNumber }) => await Walk.findOne({ walkNumber }),
-    walks: async () => await Walk.find({})
+    walk: async (parent, { walkNumber }, { user }) => {
+      if (!user) {
+        throw new Error('Not authorized');
+      }
+      return await Walk.findOne({ walkNumber });
+    },
+    walks: async (parent, args, { user }) => {
+      if (!user) {
+        throw new Error('Not authorized');
+      }
+      return await Walk.find({});
+    }
   },
 
   Mutation: {
-    addWalk: async (parent, args, context, info) => {
+    addWalk: async (parent, args, { user }, info) => {
+      if (!user.admin) {
+        throw new Error('Not authorized');
+      }
       const walk = new Walk({
         ...args
       });
 
       return await walk.save();
     },
-    updateWalk: async (parent, args, context, info) => {
+    updateWalk: async (parent, args, { user }, info) => {
+      if (!user.admin) {
+        throw new Error('Not authorized');
+      }
       const { id, ...updatedProperties } = args;
 
       console.log(updatedProperties);
@@ -33,7 +49,10 @@ module.exports = {
 
       return updatedWalk;
     },
-    removeWalk: async (parent, args, context, info) => {
+    removeWalk: async (parent, args, { user }, info) => {
+      if (!user.admin) {
+        throw new Error('Not authorized');
+      }
       const removedWalk = await Walk.findByIdAndRemove(args.id);
       if (!removedWalk) {
         throw new Error('Walk not found');
