@@ -10,6 +10,7 @@ import Layout from './components/layout/Layout';
 import HomePage from './components/HomePage';
 import Login from './components/auth/Login';
 import Logout from './components/auth/Logout';
+import PilgrimList from './components/PilgrimList';
 
 class App extends Component {
   render() {
@@ -30,7 +31,7 @@ class App extends Component {
             <Route exact path="/logout" component={Logout} />
           </Switch>
           <Switch>
-            <PrivateRoute exact path="/dashboard" />
+            <PrivateRoute exact path="/pilgrimList" component={PilgrimList} />
           </Switch>
         </Layout>
       </div>

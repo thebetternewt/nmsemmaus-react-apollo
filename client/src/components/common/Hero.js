@@ -9,7 +9,12 @@ const Hero = styled.div`
   background-size: cover;
   display: flex;
   font-size: 1rem;
-  height: 70vh;
+  height: ${({ half }) => {
+    if (half) {
+      return '35vh';
+    }
+    return '70vh';
+  }};
   justify-content: center;
   max-height: 600px;
   min-height: 300px;
@@ -41,7 +46,7 @@ const Filter = styled.div`
 `;
 
 export default props => (
-  <Hero backgroundImage={props.backgroundImage}>
+  <Hero backgroundImage={props.backgroundImage} half={props.half}>
     <Filter />
     <Container>{props.children}</Container>
   </Hero>
