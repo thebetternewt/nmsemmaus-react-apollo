@@ -7,6 +7,7 @@ const { typeDefs, resolvers } = require('./schema');
 const { User } = require('./models');
 
 dotenv.config();
+
 mongoose
   .connect(
     process.env.MONGO_URI,

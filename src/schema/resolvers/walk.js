@@ -3,7 +3,9 @@ const { Walk, Pilgrim } = require('../../models');
 module.exports = {
   Walk: {
     pilgrims: async (parent, args) =>
-      await Pilgrim.find({ walkNumber: parent.walkNumber })
+      await Pilgrim.where('walkNumber')
+        .equals(parent.walkNumber)
+        .exec()
   },
 
   Query: {
@@ -11,13 +13,13 @@ module.exports = {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Walk.findOne({ walkNumber });
+      return await Walk.findOne({ walkNumber }).exec();
     },
     walks: async (parent, args, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Walk.find({});
+      return await Walk.find().exec();
     }
   },
 
@@ -39,9 +41,13 @@ module.exports = {
       const { id, ...updatedProperties } = args;
 
       console.log(updatedProperties);
-      const updatedWalk = await Walk.findByIdAndUpdate(id, {
-        $set: { ...updatedProperties }
-      });
+      const updatedWalk = await Walk.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: { ...updatedProperties }
+        },
+        { new: true }
+      ).exec();
 
       if (!updatedWalk) {
         throw new Error('Walk not found');
@@ -53,7 +59,7 @@ module.exports = {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
-      const removedWalk = await Walk.findByIdAndRemove(args.id);
+      const removedWalk = await Walk.findOneAndRemove({ _id: args.id }).exec();
       if (!removedWalk) {
         throw new Error('Walk not found');
       }

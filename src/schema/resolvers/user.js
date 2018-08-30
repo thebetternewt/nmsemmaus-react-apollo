@@ -14,19 +14,19 @@ module.exports = {
       console.log(user);
 
       // user is authenticated
-      return await User.findById(user.id);
+      return await User.findOne({ _id: user.id }).exec();
     },
     user: async (parent, { id }, { user }) => {
       if (!user.id === id && !user.admin) {
         throw new Error('Not authorized');
       }
-      return await User.findById(id);
+      return await User.findOne({ _id: id }).exec();
     },
     users: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
-      return await User.find({});
+      return await User.find().exec();
     }
   },
 
@@ -37,7 +37,7 @@ module.exports = {
       return await newUser.save();
     },
     login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username }).exec();
 
       if (!user) {
         throw new Error('No user with that username');
@@ -66,9 +66,11 @@ module.exports = {
         updatedProperties.admin = admin;
       }
 
-      const updatedUser = await User.findByIdAndUpdate(id, {
-        $set: { ...updatedProperties }
-      });
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: id },
+        { $set: { ...updatedProperties } },
+        { new: true }
+      ).exec();
 
       if (!updatedUser) {
         throw new Error('User not found');
@@ -80,7 +82,7 @@ module.exports = {
       if (!user.id === id && !user.admin) {
         throw new Error('Not authorized');
       }
-      const removedUser = await User.findByIdAndRemove(id);
+      const removedUser = await User.findOneAndRemove({ _id: id }).exec();
 
       if (!removedUser) {
         throw new Error('User not found');
