@@ -18,12 +18,11 @@ export const ActionButton = styled.button`
   text-transform: uppercase;
   transition: all 200ms ease-out;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
-  height: 80px;
+  height: 60px;
   max-height: 70%;
+  outline: none;
 
-  &:hover,
-  &:active,
-  &:focus {
+  &:hover {
     background-color: #fff;
     color: ${RED};
   }

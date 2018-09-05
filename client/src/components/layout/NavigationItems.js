@@ -13,12 +13,14 @@ const NavigationItems = props => (
     {props.isAuthenticated ? (
       <NavigationItem link="/logout">Logout</NavigationItem>
     ) : (
-      <NavigationItem link="/login">
-        <ActionButton>Log In</ActionButton>
-      </NavigationItem>
+      <ActionButton onClick={props.toggleLoginModal}>Log In</ActionButton>
     )}
   </Nav>
 );
+
+NavigationItems.defaultProps = {
+  isAuthenticated: false
+};
 
 NavigationItems.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired

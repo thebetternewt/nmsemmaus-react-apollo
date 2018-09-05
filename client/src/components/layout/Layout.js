@@ -7,21 +7,30 @@ import Footer from './Footer';
 
 class Layout extends Component {
   static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.arrayOf(PropTypes.element).isRequired
   };
 
   state = {
     sideDrawerOpen: false,
+    showLoginModal: false
   };
 
   toggleSideDrawer = () => {
-    this.setState(prevState => ({ sideDrawerOpen: !prevState.sideDrawerOpen }));
+    this.setState({ sideDrawerOpen: !this.state.sideDrawerOpen });
+  };
+
+  toggleLoginModal = () => {
+    this.setState({ showLoginModal: !this.state.showLoginModal });
   };
 
   render() {
     return (
       <LayoutContainer>
-        <Header toggleSideDrawer={this.toggleSideDrawer} />
+        <Header
+          toggleSideDrawer={this.toggleSideDrawer}
+          toggleLoginModal={this.toggleLoginModal}
+          showLoginModal={this.state.showLoginModal}
+        />
         <SideDrawer
           toggle={this.toggleSideDrawer}
           open={this.state.sideDrawerOpen}

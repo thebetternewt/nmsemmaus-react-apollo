@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import NavigationItems from './NavigationItems';
+import Login from '../auth/Login';
 
 // import logo from '../../images/logos/gcp-logo-white.png';
 import logo from '../../images/WalktoEmmaus-Logo-white-text.png';
@@ -81,6 +82,7 @@ const MenuButton = styled.button`
 
 export default props => (
   <Header>
+    {props.showLoginModal && <Login />}
     <Container>
       <Link to="/">
         <Brand>
@@ -88,7 +90,7 @@ export default props => (
         </Brand>
       </Link>
       <nav>
-        <NavigationItems />
+        <NavigationItems toggleLoginModal={props.toggleLoginModal} />
       </nav>
       <MenuButton className="menu-button" onClick={props.toggleSideDrawer}>
         <i className="fal fa-bars fa-3x" />

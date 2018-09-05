@@ -26,8 +26,8 @@ class App extends Component {
         </Helmet>
         <Layout>
           <Route exact path="/" component={HomePage} />
+          {/* <Route exact path="/login" component={Login} /> */}
           <Switch>
-            <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
           </Switch>
           <Switch>

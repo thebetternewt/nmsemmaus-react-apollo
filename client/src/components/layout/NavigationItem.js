@@ -7,7 +7,9 @@ import { YELLOW } from '../UI/colors';
 
 const NavigationItem = props => (
   <NavItem>
-    <NavigationLink to={props.link}>{props.children}</NavigationLink>
+    <NavigationLink exact to={props.link}>
+      {props.children}
+    </NavigationLink>
   </NavItem>
 );
 

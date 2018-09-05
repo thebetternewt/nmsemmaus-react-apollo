@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import ContentContainer from '../common/ContentContainer';
 import Spinner from '../common/Spinner';
+import Modal from '../UI/Modal';
 
 class Login extends Component {
   state = {
@@ -44,34 +45,7 @@ class Login extends Component {
       return <Spinner />;
     }
 
-    return (
-      <ContentContainer>
-        <Helmet>
-          <title>Login | North MS Emmaus Community</title>
-        </Helmet>
-        <Card>
-          <h2>Log In</h2>
-          {error && <ErrorMessage>{error.message}</ErrorMessage>}
-          <form onSubmit={this.handleSubmit}>
-            <TextInput
-              type="username"
-              name="username"
-              placeholder="username"
-              onChange={this.handleChange}
-              value={username}
-            />
-            <TextInput
-              type="password"
-              name="password"
-              placeholder="password"
-              onChange={this.handleChange}
-              value={password}
-            />
-            <SubmitButton>Log in</SubmitButton>
-          </form>
-        </Card>
-      </ContentContainer>
-    );
+    return <Modal />;
   }
 }
 
