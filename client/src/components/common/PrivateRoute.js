@@ -1,15 +1,19 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { isAuthenticated, setRedirectPath } from '../../apollo/client';
 import PropTypes from 'prop-types';
 
-const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => {
-      if (isAuthenticated) {
+      if (isAuthenticated()) {
         return <Component {...props} />;
       }
-      return <Redirect to="/" />;
+
+      setRedirectPath(props.match.path);
+
+      return <Redirect to="/login" />;
     }}
   />
 );

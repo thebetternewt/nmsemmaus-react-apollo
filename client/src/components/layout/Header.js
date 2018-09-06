@@ -1,26 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { withStyles } from '@material-ui/core/styles';
+
 import styled from 'styled-components';
 
 import NavigationItems from './NavigationItems';
-import Login from '../auth/Login';
 
 // import logo from '../../images/logos/gcp-logo-white.png';
 import logo from '../../images/WalktoEmmaus-Logo-white-text.png';
 
-const Header = styled.div`
-  background-color: #333;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
-  display: flex;
-  height: 60px;
-  justify-content: center;
-  left: 0;
-  max-width: 100vw;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-
+const MenuBar = styled(AppBar)`
   nav {
     display: none;
   }
@@ -37,34 +32,20 @@ const Header = styled.div`
   }
 `;
 
-const Container = styled.div`
-  align-items: center;
-  color: #fff;
-  display: flex;
-
-  height: 100%;
-  justify-content: space-between;
-  max-width: 1200px;
-  padding: 0 15px;
-  width: 100%;
+const BrandLink = styled(Link)`
+  flex-grow: 1;
 `;
-
-const Brand = styled.div`
-  align-items: center;
-  display: flex;
-  height: 80%;
-
-  img {
-    height: 40px;
-  }
+const Brand = styled(Typography)`
+  flex-grow: 1;
+  text-transform: uppercase;
 
   span {
-    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    margin-left: 15px;
+    line-height: 0.8em;
+    /* margin-left: 15px; */
   }
 
   @media (min-width: 800px) {
@@ -74,27 +55,36 @@ const Brand = styled.div`
   }
 `;
 
-const MenuButton = styled.button`
-  background-color: transparent;
-  color: #fff;
-  border: none;
+const MenuButton = styled(IconButton)`
+  margin-left: 20px !important;
 `;
 
-export default props => (
-  <Header>
-    {props.showLoginModal && <Login />}
-    <Container>
-      <Link to="/">
-        <Brand>
-          <span>North MS Emmaus</span>
-        </Brand>
-      </Link>
-      <nav>
-        <NavigationItems toggleLoginModal={props.toggleLoginModal} />
-      </nav>
-      <MenuButton className="menu-button" onClick={props.toggleSideDrawer}>
-        <i className="fal fa-bars fa-3x" />
-      </MenuButton>
-    </Container>
-  </Header>
-);
+const Header = props => {
+  const { toggleLoginModal, toggleSideDrawer } = props;
+
+  return (
+    <MenuBar color="primary">
+      <Toolbar>
+        <BrandLink to="/">
+          <Brand variant="title" color="inherit">
+            <span>North MS Emmaus</span>
+          </Brand>
+        </BrandLink>
+        <nav>
+          <NavigationItems toggleLoginModal={toggleLoginModal} />
+        </nav>
+
+        <MenuButton
+          color="inherit"
+          aria-label="Menu"
+          onClick={toggleSideDrawer}
+          className="menu-button"
+        >
+          <MenuIcon />
+        </MenuButton>
+      </Toolbar>
+    </MenuBar>
+  );
+};
+
+export default Header;

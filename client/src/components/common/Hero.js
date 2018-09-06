@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Container from './ContentContainer';
+import { Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { DarkFilter } from '../UI/filters';
 
-const Hero = styled.div`
-  background-image: url('${props => props.backgroundImage}');
+const PaperHero = styled(Paper)`
+  background-image: url('${props => props.backgroundimage}');
   background-position: center bottom;
   background-size: cover;
   display: flex;
@@ -36,18 +39,21 @@ const Hero = styled.div`
   }
 `;
 
-const Filter = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-`;
+const Hero = props => {
+  const { backgroundImage, half } = props;
 
-export default props => (
-  <Hero backgroundImage={props.backgroundImage} half={props.half}>
-    <Filter />
-    <Container>{props.children}</Container>
-  </Hero>
-);
+  return (
+    <PaperHero
+      color="secondary"
+      square
+      backgroundimage={backgroundImage}
+      half={half}
+    >
+      <DarkFilter />
+
+      <Container>{props.children}</Container>
+    </PaperHero>
+  );
+};
+
+export default Hero;

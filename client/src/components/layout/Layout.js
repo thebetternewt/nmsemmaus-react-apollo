@@ -11,26 +11,17 @@ class Layout extends Component {
   };
 
   state = {
-    sideDrawerOpen: false,
-    showLoginModal: false
+    sideDrawerOpen: false
   };
 
   toggleSideDrawer = () => {
     this.setState({ sideDrawerOpen: !this.state.sideDrawerOpen });
   };
 
-  toggleLoginModal = () => {
-    this.setState({ showLoginModal: !this.state.showLoginModal });
-  };
-
   render() {
     return (
       <LayoutContainer>
-        <Header
-          toggleSideDrawer={this.toggleSideDrawer}
-          toggleLoginModal={this.toggleLoginModal}
-          showLoginModal={this.state.showLoginModal}
-        />
+        <Header toggleSideDrawer={this.toggleSideDrawer} />
         <SideDrawer
           toggle={this.toggleSideDrawer}
           open={this.state.sideDrawerOpen}

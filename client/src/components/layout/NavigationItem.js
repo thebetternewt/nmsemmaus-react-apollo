@@ -60,9 +60,10 @@ const NavigationLink = styled(NavLink)`
   }
 
   @media (min-width: 800px) {
-    height: 100%;
+    height: 60px;
     justify-content: center;
     padding: 0 15px;
+    margin: 0 15px 0 0;
     width: auto;
 
     &:after {

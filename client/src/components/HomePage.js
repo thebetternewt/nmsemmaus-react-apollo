@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { isAuthenticated } from '../apollo/client';
+
 import Container from './common/ContentContainer';
 import Hero from './common/Hero';
 import Separator from './UI/Separator';
 import { RED, GREEN, BLUE } from './UI/colors';
-import { ActionButton } from './UI/buttons';
+import { Button, Paper } from '@material-ui/core';
 
 import woodedPath from '../images/board-path.jpeg';
 
@@ -103,15 +105,29 @@ export default () => (
     <Hero backgroundImage={woodedPath}>
       {/* <HeroImage src={logo} alt="The Marketplace" /> */}
       <h1>North Mississippi Emmaus Community</h1>
-      <Link to="/signup">
-        <ActionButton>
-          Community Login <i className="far fa-chevron-circle-right fa-lg" />
-        </ActionButton>
-      </Link>
+      {!isAuthenticated() && (
+        <Link to="/signup">
+          <Button color="secondary" variant="raised" size="large">
+            Community Login <i className="far fa-chevron-circle-right fa-lg" />
+          </Button>
+        </Link>
+      )}
     </Hero>
     <Section>
       <Container width={'800px'}>
-        {/* <h2>Who are we?</h2> */}
+        {isAuthenticated() && (
+          <Paper
+            style={{
+              backgroundColor: 'lightgreen',
+              color: '#333',
+              marginTop: '2rem',
+              padding: '15px',
+              width: '100%'
+            }}
+          >
+            Welcome to the North MS Emmaus Community!
+          </Paper>
+        )}
         <h2>
           The vision of the Walk To Emmaus is <nobr>three-fold:</nobr>
         </h2>

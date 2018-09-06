@@ -1,29 +1,43 @@
 import React, { Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { isAuthenticated, logOutUser } from '../../apollo/client';
+
 import NavigationItem from './NavigationItem';
 // import ProfileImage from '../profiles/ProfileImage';
-import { ActionButton } from '../UI/buttons';
+import { Button } from '@material-ui/core';
 
-const NavigationItems = props => (
-  <Nav>
-    <NavigationItem link="/">Home</NavigationItem>
-    {props.isAuthenticated ? (
-      <NavigationItem link="/logout">Logout</NavigationItem>
-    ) : (
-      <ActionButton onClick={props.toggleLoginModal}>Log In</ActionButton>
-    )}
-  </Nav>
-);
-
-NavigationItems.defaultProps = {
-  isAuthenticated: false
-};
-
-NavigationItems.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+const NavigationItems = props => {
+  return (
+    <Nav>
+      <NavigationItem link="/">Home</NavigationItem>
+      {isAuthenticated() ? (
+        <Fragment>
+          <NavigationItem link="/news">News</NavigationItem>
+          <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
+          <LoginButton
+            color="secondary"
+            size="large"
+            variant="raised"
+            onClick={() => {
+              logOutUser();
+              window.location.href = '/';
+            }}
+          >
+            Logout
+          </LoginButton>
+        </Fragment>
+      ) : (
+        <Link to="/login">
+          <LoginButton color="secondary" size="large" variant="raised">
+            Login
+          </LoginButton>
+        </Link>
+      )}
+    </Nav>
+  );
 };
 
 export default NavigationItems;
@@ -41,6 +55,10 @@ const Nav = styled.ul`
     flex-direction: row;
     height: 100%;
   }
+`;
+
+const LoginButton = styled(Button)`
+  margin-right: 80px;
 `;
 
 const ProfileLink = styled.div`

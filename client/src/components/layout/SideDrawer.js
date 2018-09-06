@@ -42,7 +42,7 @@ const SideDrawer = props => (
   <React.Fragment>
     {props.open && <Backdrop onClick={props.toggle} />}
     <Container open={props.open} onClick={props.toggle}>
-      <NavigationItems />
+      <NavigationItems toggleLoginModal={props.toggleLoginModal} />
     </Container>
   </React.Fragment>
 );

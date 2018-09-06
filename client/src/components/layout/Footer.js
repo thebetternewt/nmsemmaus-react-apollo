@@ -8,7 +8,7 @@ import logo from '../../images/WalktoEmmaus-Logo-white-text.png';
 
 const FooterWrapper = styled.div`
   background-color: #333;
-  color: rgba(255, 255, 255, 0.5);
+  color: #fff;
   box-shadow: 0 3px 12px rgba(100, 100, 100, 0.7);
   display: flex;
   justify-content: center;
