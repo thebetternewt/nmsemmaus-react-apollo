@@ -27,12 +27,6 @@ const HomePage = styled.div`
     letter-spacing: normal;
   }
 
-  /* h1 {
-    font-weight: 700;
-    text-transform: capitalize;
-    font-size: 2.7rem;
-  } */
-
   h2 {
     font-size: 2.2rem;
     font-weight: 500;
@@ -106,7 +100,7 @@ export default () => (
       {/* <HeroImage src={logo} alt="The Marketplace" /> */}
       <h1>North Mississippi Emmaus Community</h1>
       {!isAuthenticated() && (
-        <Link to="/signup">
+        <Link to="/login">
           <Button color="secondary" variant="raised" size="large">
             Community Login <i className="far fa-chevron-circle-right fa-lg" />
           </Button>
@@ -174,9 +168,3 @@ export default () => (
     </Section>
   </HomePage>
 );
-
-const HeroImage = styled.img`
-  width: 80%;
-  max-width: 400px;
-  margin-bottom: 2rem;
-`;
