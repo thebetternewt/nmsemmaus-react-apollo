@@ -7,7 +7,8 @@ module.exports = mongoose.model(
     {
       walkNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
       },
       gender: {
         type: String,

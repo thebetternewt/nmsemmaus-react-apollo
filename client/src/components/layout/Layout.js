@@ -45,5 +45,5 @@ const LayoutBody = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding-top: 60px;
+  padding-top: 56px;
 `;

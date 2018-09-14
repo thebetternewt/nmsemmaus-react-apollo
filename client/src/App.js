@@ -15,6 +15,7 @@ import HomePage from './components/HomePage';
 import Login from './components/auth/Login';
 import PilgrimListsIndex from './components/PilgrimListsIndex';
 import PilgrimList from './components/PilgrimList';
+import Admin from './components/Admin';
 
 import theme from './components/common/MuiTheme';
 
@@ -64,6 +65,9 @@ class App extends Component {
                 path="/pilgrim-lists/:walk_number"
                 component={PilgrimList}
               />
+            </Switch>
+            <Switch>
+              <PrivateRoute path="/admin" component={Admin} />
             </Switch>
           </Layout>
         </div>

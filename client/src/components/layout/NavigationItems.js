@@ -1,12 +1,10 @@
 import React, { Fragment } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { isAuthenticated, logOutUser } from '../../apollo/client';
 
 import NavigationItem from './NavigationItem';
-// import ProfileImage from '../profiles/ProfileImage';
 import { Button } from '@material-ui/core';
 
 const NavigationItems = props => {
@@ -17,6 +15,7 @@ const NavigationItems = props => {
         <Fragment>
           <NavigationItem link="/news">News</NavigationItem>
           <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
+          <NavigationItem link="/admin/walks">Admin</NavigationItem>
           <LoginButton
             color="secondary"
             size="large"
@@ -58,13 +57,9 @@ const Nav = styled.ul`
 `;
 
 const LoginButton = styled(Button)`
-  margin-right: 80px;
-`;
-
-const ProfileLink = styled.div`
-  display: flex;
-  align-items: center;
-  span {
-    margin-left: 6px;
+  @media (max-width: 799px) {
+    margin-top: 15px !important;
+    align-self: center;
+    width: 90%;
   }
 `;
