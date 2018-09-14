@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { isAuthenticated } from '../apollo/client';
 
+import Section from './common/Section';
 import Container from './common/ContentContainer';
 import Hero from './common/Hero';
 import Separator from './UI/Separator';
@@ -85,15 +86,6 @@ const HomePage = styled.div`
   }
 `;
 
-const Section = styled.div`
-  ${props =>
-    props.dark
-      ? 'background-color: #333; color: #fff'
-      : 'background-color: #fff; color: #111'};
-  width: 100vw;
-  padding: 1rem 0;
-`;
-
 export default () => (
   <HomePage>
     <Hero backgroundImage={woodedPath}>
@@ -116,7 +108,9 @@ export default () => (
               color: '#333',
               marginTop: '2rem',
               padding: '15px',
-              width: '100%'
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center'
             }}
           >
             Welcome to the North MS Emmaus Community!

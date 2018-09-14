@@ -61,10 +61,9 @@ const getUser = async token => {
   );
 
   if (ok) {
-    const user = await User.findById(result.id);
+    const user = await User.findOne({ _id: result.id });
     return user;
   } else {
-    console.error(result);
     return null;
   }
 };

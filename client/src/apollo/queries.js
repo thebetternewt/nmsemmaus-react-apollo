@@ -29,12 +29,30 @@ const REDIRECT_QUERY = gql`
 `;
 
 const WALK_QUERY = gql`
-  query walkQuery($walkNumber: ID) {
+  query walkQuery($walkNumber: Int!) {
     walk(walkNumber: $walkNumber) {
+      walkNumber
+      startDate
+      endDate
       pilgrims {
+        id
         lastName
         firstName
+        hometown
+        sponsor
       }
+    }
+  }
+`;
+
+const WALKS_QUERY = gql`
+  query WalksQuery {
+    walks {
+      id
+      walkNumber
+      startDate
+      endDate
+      gender
     }
   }
 `;
@@ -44,5 +62,6 @@ export {
   AUTH_QUERY,
   REDIRECT_QUERY,
   CURRENT_USER_QUERY,
-  WALK_QUERY
+  WALK_QUERY,
+  WALKS_QUERY
 };

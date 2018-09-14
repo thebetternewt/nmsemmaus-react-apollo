@@ -181,9 +181,12 @@ class Login extends Component {
   }
 }
 
+Login.defaultProps = {
+  redirectPath: null
+};
+
 Login.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  redirectPath: PropTypes.string.isRequired
+  redirectPath: PropTypes.string
 };
 
 export default withStyles(styles)(Login);
@@ -197,16 +200,4 @@ const Backdrop = styled(Paper)`
   background-image: url(${boardPath});
   background-size: cover;
   background-position: center center;
-`;
-
-const TextInput = styled.input`
-  display: block;
-  width: 100%;
-  max-width: 90vw;
-  border: none;
-  border-radius: 99px;
-  font-size: 1rem;
-
-  margin: 10px auto;
-  padding: 10px 15px;
 `;

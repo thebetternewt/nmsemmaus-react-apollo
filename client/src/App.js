@@ -13,6 +13,7 @@ import PrivateRoute from './components/common/PrivateRoute';
 import Layout from './components/layout/Layout';
 import HomePage from './components/HomePage';
 import Login from './components/auth/Login';
+import PilgrimListsIndex from './components/PilgrimListsIndex';
 import PilgrimList from './components/PilgrimList';
 
 import theme from './components/common/MuiTheme';
@@ -54,6 +55,13 @@ class App extends Component {
               <PrivateRoute
                 exact
                 path="/pilgrim-lists"
+                component={PilgrimListsIndex}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/pilgrim-lists/:walk_number"
                 component={PilgrimList}
               />
             </Switch>

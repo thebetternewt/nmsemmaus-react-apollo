@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Container from './ContentContainer';
 import { Paper } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import { DarkFilter } from '../UI/filters';
 
 const PaperHero = styled(Paper)`
@@ -12,11 +12,14 @@ const PaperHero = styled(Paper)`
   background-size: cover;
   display: flex;
   font-size: 1rem;
-  height: ${({ half }) => {
-    if (half) {
-      return '35vh';
+  height: ${({ size }) => {
+    console.log('[size]:', size);
+    switch (size) {
+      case 'sm':
+        return '35vh';
+      default:
+        return '70vh';
     }
-    return '70vh';
   }};
   justify-content: center;
   max-height: 600px;
@@ -27,10 +30,10 @@ const PaperHero = styled(Paper)`
 
   h1 {
     color: #fff;
-    font-family: 'Roboto Slab', 'sans-serif';
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
     font-size: 3.2rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     margin-bottom: 0.7em;
 
     @media screen and (max-width: 500px) {
@@ -40,20 +43,28 @@ const PaperHero = styled(Paper)`
 `;
 
 const Hero = props => {
-  const { backgroundImage, half } = props;
+  const { backgroundImage, size } = props;
 
   return (
     <PaperHero
       color="secondary"
       square
       backgroundimage={backgroundImage}
-      half={half}
+      size={'sm'}
     >
       <DarkFilter />
 
       <Container>{props.children}</Container>
     </PaperHero>
   );
+};
+
+Hero.defaultProps = {
+  size: 'lg'
+};
+
+Hero.propTypes = {
+  size: PropTypes.string
 };
 
 export default Hero;
