@@ -13,5 +13,6 @@ module.exports = [
   base,
   require('./pilgrim'),
   require('./walk'),
-  require('./user')
+  require('./user'),
+  require('./newsletter')
 ];

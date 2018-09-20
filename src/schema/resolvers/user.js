@@ -54,14 +54,22 @@ module.exports = {
       );
     },
     updateUser: async (parent, args, { user }) => {
-      const { id, admin, ...updatedProperties } = args;
+      const { id, admin, password, ...updatedProperties } = args;
 
       if (!user.id === id && !user.admin) {
         throw new Error('Not authorized');
       }
 
-      if (user.admin) {
+      // Only allow update of admin if current user is admin and
+      // only update admin if specified args
+      if (user.admin && admin !== undefined) {
         updatedProperties.admin = admin;
+      }
+
+      if (password) {
+        // Hash new password
+        const hashedPass = await bcrypt.hash(password, 10);
+        updatedProperties.password = hashedPass;
       }
 
       const updatedUser = await User.findOneAndUpdate(
