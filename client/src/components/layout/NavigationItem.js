@@ -25,7 +25,7 @@ const NavItem = styled.li`
   margin: 0;
   width: 100%;
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     width: auto;
   }
 `;
@@ -35,7 +35,7 @@ const NavigationLink = styled(NavLink)`
   display: flex;
   height: 60px;
   justify-content: flex-start;
-  padding: 0 30px 0 30px;
+  padding: 0 30px;
   position: relative;
   width: 100%;
   text-transform: uppercase;
@@ -59,11 +59,11 @@ const NavigationLink = styled(NavLink)`
     }
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     height: 60px;
     justify-content: center;
-    padding: 0 15px;
-    margin: 0 15px 0 0;
+    padding: 0 10px;
+    margin: 0 5px 0 0;
     width: auto;
 
     &:after {

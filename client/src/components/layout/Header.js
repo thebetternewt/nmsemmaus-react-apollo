@@ -20,7 +20,7 @@ const MenuBar = styled(AppBar)`
     display: none;
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     .menu-button {
       display: none;
     }
@@ -45,10 +45,9 @@ const Brand = styled(Typography)`
     letter-spacing: -0.02em;
     text-transform: uppercase;
     line-height: 0.8em;
-    /* margin-left: 15px; */
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     span {
       font-size: 24px;
     }

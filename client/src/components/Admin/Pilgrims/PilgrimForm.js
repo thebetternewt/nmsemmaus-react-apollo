@@ -8,7 +8,6 @@ import {
   Radio,
   InputLabel,
   Input,
-  TextField,
   Button
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,13 +18,14 @@ const styles = {
   }
 };
 
-class WalkForm extends Component {
+class PilgrimForm extends Component {
   state = {
-    id: this.props.walk.id || '',
-    walkNumber: this.props.walk.walkNumber || '',
-    gender: this.props.walk.gender || '',
-    startDate: this.props.walk.startDate || '',
-    endDate: this.props.walk.endDate || ''
+    id: this.props.pilgrim.id || '',
+    firstName: this.props.pilgrim.firstName || '',
+    lastName: this.props.pilgrim.lastName || '',
+    hometown: this.props.pilgrim.hometown || '',
+    sponsor: this.props.pilgrim.sponsor || '',
+    walkNumber: this.props.pilgrim.walkNumber || this.props.walkNumber
   };
 
   handleInputChange = e => {
@@ -33,8 +33,18 @@ class WalkForm extends Component {
   };
 
   render() {
-    const { id, walkNumber, gender, startDate, endDate } = this.state;
+    const {
+      id,
+      firstName,
+      lastName,
+      hometown,
+      sponsor,
+      walkNumber
+    } = this.state;
     const { submit, close, error, classes } = this.props;
+
+    console.log('[Pilgrim]:', this.props.pilgrim);
+    console.log('[WalkNumber]:', walkNumber);
 
     return (
       <form
@@ -43,12 +53,13 @@ class WalkForm extends Component {
           submit({
             variables: {
               id,
-              walkNumber,
-              gender,
-              startDate,
-              endDate
+              firstName,
+              lastName,
+              hometown,
+              sponsor,
+              walkNumber
             },
-            refetchQueries: ['WalksQuery']
+            refetchQueries: ['PilgrimsQuery']
           })
             .then(() => close())
             .catch(err => console.log(err));
@@ -62,66 +73,52 @@ class WalkForm extends Component {
             ))}
           </pre>
         )}
+
         <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="walkNumber">Walk Number</InputLabel>
+          <InputLabel htmlFor="firstName">First Name</InputLabel>
           <Input
             type="text"
-            id="walkNumber"
-            name="walkNumber"
-            value={walkNumber}
+            id="firstName"
+            name="firstName"
+            value={firstName}
             autoFocus
             onChange={this.handleInputChange}
           />
         </FormControl>
-        {/* <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="gender">Gender</InputLabel>
+
+        <FormControl margin="normal" required fullWidth>
+          <InputLabel htmlFor="lastName">Last Name</InputLabel>
           <Input
             type="text"
-            id="gender"
-            name="gender"
-            value={gender}
+            id="lastName"
+            name="lastName"
+            value={lastName}
+            autoFocus
             onChange={this.handleInputChange}
           />
-        </FormControl> */}
-        <FormControl component="fieldset" style={{ marginTop: '1rem' }}>
-          <FormLabel component="legend" style={{ fontSize: '0.8rem' }}>
-            Gender
-          </FormLabel>
-          <RadioGroup
-            style={{ flexDirection: 'row' }}
-            aria-label="Gender"
-            name="gender"
-            value={gender}
-            onChange={this.handleInputChange}
-          >
-            <FormControlLabel value="Men" control={<Radio />} label="Men" />
-            <FormControlLabel value="Women" control={<Radio />} label="Women" />
-          </RadioGroup>
         </FormControl>
+
         <FormControl margin="normal" required fullWidth>
-          <TextField
-            type="date"
-            id="startDate"
-            name="startDate"
-            label="Start Date"
-            value={startDate}
+          <InputLabel htmlFor="hometown">Hometown</InputLabel>
+          <Input
+            type="text"
+            id="hometown"
+            name="hometown"
+            value={hometown}
+            autoFocus
             onChange={this.handleInputChange}
-            InputLabelProps={{
-              shrink: true
-            }}
           />
         </FormControl>
+
         <FormControl margin="normal" required fullWidth>
-          <TextField
-            type="date"
-            id="endDate"
-            label="End Date"
-            name="endDate"
-            value={endDate}
+          <InputLabel htmlFor="sponsor">Sponsor</InputLabel>
+          <Input
+            type="text"
+            id="sponsor"
+            name="sponsor"
+            value={sponsor}
+            autoFocus
             onChange={this.handleInputChange}
-            InputLabelProps={{
-              shrink: true
-            }}
           />
         </FormControl>
 
@@ -146,14 +143,14 @@ class WalkForm extends Component {
   }
 }
 
-WalkForm.defaultProps = {
-  walk: {}
+PilgrimForm.defaultProps = {
+  pilgrim: {}
 };
 
-WalkForm.propTypes = {
+PilgrimForm.propTypes = {
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  walk: PropTypes.shape()
+  pilgrim: PropTypes.shape()
 };
 
-export default withStyles(styles)(WalkForm);
+export default withStyles(styles)(PilgrimForm);

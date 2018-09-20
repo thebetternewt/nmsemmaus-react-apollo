@@ -17,12 +17,12 @@ export const items = (
         <ListItemText primary="Walks" />
       </ListItem>
     </Link>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <GroupIcon />
       </ListItemIcon>
       <ListItemText primary="Pilgrims" />
-    </ListItem>
+    </ListItem> */}
     <ListItem button>
       <ListItemIcon>
         <MailIcon />

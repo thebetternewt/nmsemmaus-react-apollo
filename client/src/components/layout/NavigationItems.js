@@ -15,6 +15,8 @@ const NavigationItems = props => {
         <Fragment>
           <NavigationItem link="/news">News</NavigationItem>
           <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
+          <NavigationItem link="/">Applications</NavigationItem>
+          <NavigationItem link="/sponsorship">Sponsorship</NavigationItem>
           <NavigationItem link="/admin/walks">Admin</NavigationItem>
           <LoginButton
             color="secondary"
@@ -49,7 +51,7 @@ const Nav = styled.ul`
   margin: 0;
   padding: 0;
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     align-items: center;
     flex-direction: row;
     height: 100%;
@@ -57,7 +59,7 @@ const Nav = styled.ul`
 `;
 
 const LoginButton = styled(Button)`
-  @media (max-width: 799px) {
+  @media (max-width: 899px) {
     margin-top: 15px !important;
     align-self: center;
     width: 90%;

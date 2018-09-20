@@ -11,8 +11,6 @@ module.exports = {
         throw new Error('You are not authenticated!');
       }
 
-      console.log(user);
-
       // user is authenticated
       return await User.findOne({ _id: user.id }).exec();
     },

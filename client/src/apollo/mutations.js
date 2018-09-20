@@ -46,4 +46,54 @@ const UPDATE_WALK = gql`
   }
 `;
 
-export { ADD_WALK, UPDATE_WALK };
+const ADD_PILGRIM = gql`
+  mutation AddPilgrim(
+    $firstName: String!
+    $lastName: String!
+    $hometown: String!
+    $sponsor: String!
+    $walkNumber: Int!
+  ) {
+    addPilgrim(
+      firstName: $firstName
+      lastName: $lastName
+      hometown: $hometown
+      sponsor: $sponsor
+      walkNumber: $walkNumber
+    ) {
+      id
+      firstName
+      lastName
+      hometown
+      sponsor
+      walkNumber
+    }
+  }
+`;
+
+const UPDATE_PILGRIM = gql`
+  mutation UpdatePilgrim(
+    $id: ID!
+    $firstName: String
+    $lastName: String
+    $hometown: String
+    $sponsor: String
+  ) {
+    UpdatePilgrim(
+      id: $id
+      firstName: $firstName
+      lastName: $lastName
+      hometown: $hometown
+      sponsor: $sponsor
+    ) {
+      id
+      firstName
+      lastName
+      hometown
+      sponsor
+      walkNumber
+    }
+  }
+`;
+
+export { ADD_WALK, UPDATE_WALK, ADD_PILGRIM, UPDATE_PILGRIM };

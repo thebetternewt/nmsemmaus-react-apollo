@@ -8,12 +8,11 @@ import { DarkFilter } from '../UI/filters';
 
 const PaperHero = styled(Paper)`
   background-image: url('${props => props.backgroundimage}');
-  background-position: center bottom;
+  background-position: center;
   background-size: cover;
   display: flex;
   font-size: 1rem;
   height: ${({ size }) => {
-    console.log('[size]:', size);
     switch (size) {
       case 'sm':
         return '35vh';
@@ -50,7 +49,7 @@ const Hero = props => {
       color="secondary"
       square
       backgroundimage={backgroundImage}
-      size={'sm'}
+      size={size}
     >
       <DarkFilter />
 

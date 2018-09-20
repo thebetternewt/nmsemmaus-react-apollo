@@ -11,7 +11,7 @@ export default class AddWalk extends Component {
 
     return (
       <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
-        <h3>Add Department</h3>
+        <h3>Add Walk</h3>
         <Mutation mutation={ADD_WALK}>
           {(addWalk, { data, loading, error }) => {
             if (loading) {

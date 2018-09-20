@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import WalkForm from './WalkForm';
+import PilgrimForm from './PilgrimForm';
 import { Mutation } from 'react-apollo';
-import { UPDATE_WALK } from '../../../apollo/mutations';
+import { UPDATE_PILGRIM } from '../../../apollo/mutations';
 
 import { Paper, CircularProgress } from '@material-ui/core';
 
-export default class EditWalk extends Component {
+export default class EditPilgrim extends Component {
   static getDerivedStateFromProps(nextProps) {
-    return { walk: nextProps.walk };
+    return { pilgrim: nextProps.pilgrim };
   }
 
   state = {
-    walk: this.props
+    pilgrim: this.props
   };
 
   render() {
-    const { walk } = this.state;
+    const { pilgrim } = this.state;
     const { cancelEdit } = this.props;
 
     return (
       <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
-        <h3>Edit Walk #{walk.walkNumber}</h3>
-        <Mutation mutation={UPDATE_WALK}>
-          {(updateWalk, { data, loading, error }) => {
+        <h3>Edit Pilgrim</h3>
+        <Mutation mutation={UPDATE_PILGRIM}>
+          {(updatePilgrim, { data, loading, error }) => {
             if (loading) {
               return <CircularProgress />;
             }
 
             return (
-              <WalkForm
-                submit={updateWalk}
+              <PilgrimForm
+                submit={updatePilgrim}
                 error={error}
-                walk={walk}
                 close={cancelEdit}
+                pilgrim={pilgrim}
               />
             );
           }}
@@ -43,7 +43,7 @@ export default class EditWalk extends Component {
   }
 }
 
-EditWalk.propTypes = {
-  walk: PropTypes.shape().isRequired,
+EditPilgrim.propTypes = {
+  pilgrim: PropTypes.shape().isRequired,
   cancelEdit: PropTypes.func.isRequired
 };

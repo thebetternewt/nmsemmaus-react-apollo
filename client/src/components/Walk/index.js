@@ -2,19 +2,21 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { WALK_QUERY } from '../../apollo/queries';
-import { CircularProgress } from '@material-ui/core';
+
+import { CircularProgress, Grid, Paper } from '@material-ui/core';
 import Hero from '../common/Hero';
+import PilgrimsList from './PilgrimsList';
 
 import candles from '../../images/candles.jpeg';
 
-const PilgrimList = props => {
+const Walk = props => {
   console.log(props);
   const walkNumber = props.match.params.walk_number;
 
   return (
     <div>
       <Hero backgroundImage={candles}>
-        <h1>WalkNumber {walkNumber}</h1>
+        <h1>Walk #{walkNumber}</h1>
       </Hero>
       <Query query={WALK_QUERY} variables={{ walkNumber }}>
         {({ data, loading }) => {
@@ -27,16 +29,26 @@ const PilgrimList = props => {
           if (data && data.walk) {
             const { pilgrims } = data.walk;
             console.log(pilgrims);
-            const pilgrimItems = pilgrims.map(pilgrim => (
+            /* const pilgrimItems = pilgrims.map(pilgrim => (
               <li key={pilgrim.id}>
                 {pilgrim.firstName} {pilgrim.lastName}, {pilgrim.hometown},
                 Sponsor: {pilgrim.sponsor}
               </li>
-            ));
+            )); */
+
             return (
-              <Fragment>
-                <ul>{pilgrimItems}</ul>
-              </Fragment>
+              <div style={{ padding: '2rem' }}>
+                <Grid container spacing={32} justify="center" direction="row">
+                  <Grid item xs={12} sm={6} lg={4} direction="column">
+                    <h2>Pilgrims</h2>
+                    <PilgrimsList pilgrims={pilgrims} />
+                  </Grid>
+                  <Grid item xs={12} sm={6} lg={4} direction="column">
+                    <h2>Workers</h2>
+                    <p>No workers recorded.</p>
+                  </Grid>
+                </Grid>
+              </div>
             );
           }
 
@@ -47,4 +59,4 @@ const PilgrimList = props => {
   );
 };
 
-export default PilgrimList;
+export default Walk;

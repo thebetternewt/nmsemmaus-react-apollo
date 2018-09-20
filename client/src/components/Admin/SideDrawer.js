@@ -7,7 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import Divider from '@material-ui/core/Divider';
 
 import { items } from './tileData';
 
@@ -15,10 +14,11 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   drawerPaper: {
-    position: 'fixed',
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: drawerWidth
+    width: drawerWidth,
+    height: '100%'
   },
   toolbar: theme.mixins.toolbar,
   subheader: {

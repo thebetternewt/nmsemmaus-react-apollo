@@ -13,8 +13,9 @@ import PrivateRoute from './components/common/PrivateRoute';
 import Layout from './components/layout/Layout';
 import HomePage from './components/HomePage';
 import Login from './components/auth/Login';
-import PilgrimListsIndex from './components/PilgrimListsIndex';
-import PilgrimList from './components/PilgrimList';
+import WalksIndex from './components/WalksIndex';
+import Walk from './components/Walk';
+import Sponsorship from './components/Sponsorship';
 import Admin from './components/Admin';
 
 import theme from './components/common/MuiTheme';
@@ -56,15 +57,18 @@ class App extends Component {
               <PrivateRoute
                 exact
                 path="/pilgrim-lists"
-                component={PilgrimListsIndex}
+                component={WalksIndex}
               />
             </Switch>
             <Switch>
               <PrivateRoute
                 exact
                 path="/pilgrim-lists/:walk_number"
-                component={PilgrimList}
+                component={Walk}
               />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/sponsorship" component={Sponsorship} />
             </Switch>
             <Switch>
               <PrivateRoute path="/admin" component={Admin} />

@@ -19,7 +19,7 @@ const Container = styled.div`
   transition: transform 300ms ease-out;
   transform: ${props => (props.open ? 'translateX(0)' : 'translateX(100%)')};
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     display: none;
   }
 `;
@@ -33,7 +33,7 @@ const Backdrop = styled.div`
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
 
-  @media (min-width: 800px) {
+  @media (min-width: 900px) {
     display: none;
   }
 `;

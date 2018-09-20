@@ -40,6 +40,7 @@ const WALK_QUERY = gql`
         firstName
         hometown
         sponsor
+        walkNumber
       }
     }
   }

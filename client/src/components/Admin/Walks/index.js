@@ -4,6 +4,7 @@ import { CircularProgress, Button } from '@material-ui/core';
 import WalkList from './WalkList';
 import AddWalk from './AddWalk';
 import EditWalk from './EditWalk';
+import Pilgrims from '../Pilgrims';
 
 export default class Walks extends Component {
   state = {
@@ -41,7 +42,10 @@ export default class Walks extends Component {
         <h2>Manage Walks</h2>
 
         {showEditWalk && (
-          <EditWalk walk={selectedWalk} cancelEdit={this.hideEditWalk} />
+          <Fragment>
+            <EditWalk walk={selectedWalk} cancelEdit={this.hideEditWalk} />
+            <Pilgrims walkNumber={selectedWalk.walkNumber} />
+          </Fragment>
         )}
         {!showAddWalk &&
           !showEditWalk && <WalkList selectWalk={this.showEditWalk} />}
