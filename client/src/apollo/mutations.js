@@ -79,7 +79,7 @@ const UPDATE_PILGRIM = gql`
     $hometown: String
     $sponsor: String
   ) {
-    UpdatePilgrim(
+    updatePilgrim(
       id: $id
       firstName: $firstName
       lastName: $lastName
@@ -95,5 +95,60 @@ const UPDATE_PILGRIM = gql`
     }
   }
 `;
+const ADD_NEWSLETTER = gql`
+  mutation AddNewsletter(
+    $title: String!
+    $body: String!
+    $publishedOn: String!
+  ) {
+    addNewsletter(title: $title, body: $body, publishedOn: $publishedOn) {
+      id
+      title
+      body
+      publishedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
 
-export { ADD_WALK, UPDATE_WALK, ADD_PILGRIM, UPDATE_PILGRIM };
+const UPDATE_NEWSLETTER = gql`
+  mutation UpdateNewsletter(
+    $id: ID!
+    $title: String
+    $body: String
+    $publishedOn: String
+  ) {
+    updateNewsletter(
+      id: $id
+      title: $title
+      body: $body
+      publishedOn: $publishedOn
+    ) {
+      id
+      title
+      body
+      publishedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+const REMOVE_NEWSLETTER = gql`
+  mutation RemoveNewsletter($id: ID!) {
+    removeNewsletter(id: $id) {
+      id
+    }
+  }
+`;
+
+export {
+  ADD_WALK,
+  UPDATE_WALK,
+  ADD_PILGRIM,
+  UPDATE_PILGRIM,
+  ADD_NEWSLETTER,
+  UPDATE_NEWSLETTER,
+  REMOVE_NEWSLETTER
+};

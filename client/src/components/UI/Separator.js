@@ -6,5 +6,5 @@ export default styled.div`
   height: 5px;
   background-color: ${PURPLE};
   box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.5);
-  margin: 2rem 0;
+  margin: 2rem auto;
 `;

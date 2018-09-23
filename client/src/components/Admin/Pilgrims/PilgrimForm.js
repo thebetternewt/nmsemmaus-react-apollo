@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  InputLabel,
-  Input,
-  Button
-} from '@material-ui/core';
+import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -59,7 +50,7 @@ class PilgrimForm extends Component {
               sponsor,
               walkNumber
             },
-            refetchQueries: ['PilgrimsQuery']
+            refetchQueries: ['WalkQuery']
           })
             .then(() => close())
             .catch(err => console.log(err));
@@ -93,7 +84,6 @@ class PilgrimForm extends Component {
             id="lastName"
             name="lastName"
             value={lastName}
-            autoFocus
             onChange={this.handleInputChange}
           />
         </FormControl>
@@ -105,7 +95,6 @@ class PilgrimForm extends Component {
             id="hometown"
             name="hometown"
             value={hometown}
-            autoFocus
             onChange={this.handleInputChange}
           />
         </FormControl>
@@ -117,7 +106,6 @@ class PilgrimForm extends Component {
             id="sponsor"
             name="sponsor"
             value={sponsor}
-            autoFocus
             onChange={this.handleInputChange}
           />
         </FormControl>

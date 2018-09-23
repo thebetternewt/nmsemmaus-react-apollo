@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import jwt_decode from 'jwt-decode';
 import './App.css';
 
@@ -12,6 +11,7 @@ import { setAuthenticatedUser, logOutUser } from './apollo/client';
 import PrivateRoute from './components/common/PrivateRoute';
 import Layout from './components/layout/Layout';
 import HomePage from './components/HomePage';
+import News from './components/News';
 import Login from './components/auth/Login';
 import WalksIndex from './components/WalksIndex';
 import Walk from './components/Walk';
@@ -53,6 +53,12 @@ class App extends Component {
           <Layout>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={Login} />
+            <Switch>
+              <PrivateRoute exact path="/news" component={News} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/news/:id" component={News} />
+            </Switch>
             <Switch>
               <PrivateRoute
                 exact

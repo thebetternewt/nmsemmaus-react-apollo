@@ -29,7 +29,7 @@ const REDIRECT_QUERY = gql`
 `;
 
 const WALK_QUERY = gql`
-  query walkQuery($walkNumber: Int!) {
+  query WalkQuery($walkNumber: Int!) {
     walk(walkNumber: $walkNumber) {
       walkNumber
       startDate
@@ -58,11 +58,66 @@ const WALKS_QUERY = gql`
   }
 `;
 
+const UPCOMING_WALKS_QUERY = gql`
+  query UpcomingWalksQuery($afterDate: String!) {
+    walks(afterDate: $afterDate) {
+      id
+      walkNumber
+      startDate
+      endDate
+      gender
+    }
+  }
+`;
+
+const NEWSLETTERS_QUERY = gql`
+  query NewslettersQuery {
+    newsletters {
+      id
+      title
+      body
+      publishedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+const LATEST_NEWSLETTER_QUERY = gql`
+  query LatestNewsletterQuery {
+    latestNewsletter {
+      id
+      title
+      body
+      publishedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+const NEWSLETTER_QUERY = gql`
+  query NewsletterQuery($id: ID!) {
+    newsletter(id: $id) {
+      id
+      title
+      body
+      publishedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export {
   LOGIN_MUTATION,
   AUTH_QUERY,
   REDIRECT_QUERY,
   CURRENT_USER_QUERY,
   WALK_QUERY,
-  WALKS_QUERY
+  WALKS_QUERY,
+  UPCOMING_WALKS_QUERY,
+  NEWSLETTERS_QUERY,
+  LATEST_NEWSLETTER_QUERY,
+  NEWSLETTER_QUERY
 };

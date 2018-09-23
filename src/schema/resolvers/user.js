@@ -6,7 +6,6 @@ require('dotenv').config();
 module.exports = {
   Query: {
     me: async (parent, args, { user }) => {
-      console.log(user);
       if (!user) {
         throw new Error('You are not authenticated!');
       }

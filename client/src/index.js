@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 
 import './index.css';
 import App from './App';
+import ScrollToTop from './components/common/ScrollToTop';
 import registerServiceWorker from './registerServiceWorker';
 
 import client from './apollo/client';
@@ -12,7 +13,9 @@ import client from './apollo/client';
 const app = (
   <ApolloProvider client={client}>
     <Router>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </Router>
   </ApolloProvider>
 );

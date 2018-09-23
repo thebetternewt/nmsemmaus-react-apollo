@@ -8,6 +8,7 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
+  CircularProgress,
   Typography,
   CardActions,
   Button
@@ -29,24 +30,39 @@ export default class PilgrimsListsIndex extends Component {
         <Hero backgroundImage={candles} size="sm">
           <h1>Pilgrim Lists</h1>
         </Hero>
-        <Section>
+        <Grid
+          container
+          spacing={16}
+          justify="flex-start"
+          style={{ padding: '3rem 10px' }}
+        >
           <Query query={WALKS_QUERY}>
             {({ data, loading }) => {
               if (loading) {
-                return <h2>Loading...</h2>;
+                return (
+                  <Grid item>
+                    <CircularProgress />;
+                  </Grid>
+                );
               }
 
               if (data && data.walks) {
                 console.log(data);
                 const { walks } = data;
                 const walkCards = walks.map(walk => (
-                  <Grid item xs={12} sm={6} md={6} lg={4} key={walk.id}>
-                    <Link to={`/pilgrim-lists/${walk.walkNumber}`}>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <Link
+                      to={`/pilgrim-lists/${walk.walkNumber}`}
+                      style={{ width: '100%' }}
+                      key={walk.id}
+                    >
                       <Card
-                        style={{ flexGrow: 0, margin: '2rem 0' }}
                         elevation={22}
                         style={{
+                          // flexGrow: 0,
+                          // margin: '2rem 0',
                           height: '100%',
+                          width: '100%',
                           border: `3px solid ${
                             walk.gender === 'Men'
                               ? 'rgba(0, 0, 255, 0.5)'
@@ -86,17 +102,11 @@ export default class PilgrimsListsIndex extends Component {
                     </Link>
                   </Grid>
                 ));
-                return (
-                  <Container>
-                    <Grid container spacing={16}>
-                      {walkCards}
-                    </Grid>
-                  </Container>
-                );
+                return <Fragment>{walkCards}</Fragment>;
               }
             }}
           </Query>
-        </Section>
+        </Grid>
       </Fragment>
     );
   }

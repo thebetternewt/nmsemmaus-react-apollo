@@ -12,7 +12,7 @@ module.exports = gql`
 
   extend type Query {
     walk(walkNumber: Int!): Walk
-    walks: [Walk]
+    walks(limit: Int, afterDate: String): [Walk]
   }
 
   extend type Mutation {

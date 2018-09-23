@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { CircularProgress, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import WalkList from './WalkList';
 import AddWalk from './AddWalk';

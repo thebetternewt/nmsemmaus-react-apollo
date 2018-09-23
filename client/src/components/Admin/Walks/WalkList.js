@@ -45,7 +45,7 @@ class WalkList extends Component {
 
             if (data) {
               const { walks } = data;
-              console.log(walks);
+
               return (
                 <Paper elevation={12} style={{ margin: '2rem 0', padding: 15 }}>
                   <Table>

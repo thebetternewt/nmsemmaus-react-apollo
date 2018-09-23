@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { Helmet } from 'react-helmet';
+import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import jwt_decode from 'jwt-decode';
 
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { LOGIN_MUTATION } from '../../apollo/queries';
 import {
@@ -14,8 +13,6 @@ import {
   setRedirectPath
 } from '../../apollo/client';
 
-import ContentContainer from '../common/ContentContainer';
-import Spinner from '../common/Spinner';
 import {
   Typography,
   Paper,
@@ -84,6 +81,9 @@ class Login extends Component {
 
     return (
       <Fragment>
+        <Helmet>
+          <title>Login | North MS Emmaus</title>
+        </Helmet>
         <Backdrop>
           <DarkFilter />
         </Backdrop>
@@ -107,13 +107,11 @@ class Login extends Component {
                 }
 
                 if (data) {
-                  console.log(data);
                   const token = data.login;
                   localStorage.setItem('token', token);
                   setAuthenticatedUser(jwt_decode(token));
                   const path = getRedirectPath();
                   if (path) {
-                    console.log(path);
                     setRedirectPath(null);
                     return <Redirect to={path} />;
                   } else {

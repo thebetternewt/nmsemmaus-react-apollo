@@ -6,14 +6,15 @@ module.exports = gql`
     title: String!
     body: String!
     publishedOn: String!
-    document: String
+    documentLink: String
     createdAt: String
     updatedAt: String
   }
 
   extend type Query {
     newsletter(id: ID!): Newsletter
-    newsletters: [Newsletter]!
+    latestNewsletter: Newsletter
+    newsletters(limit: Int): [Newsletter]!
   }
 
   extend type Mutation {
@@ -21,7 +22,7 @@ module.exports = gql`
       title: String!
       body: String!
       publishedOn: String!
-      document: String
+      document: Upload
     ): Newsletter!
 
     updateNewsletter(
@@ -29,7 +30,7 @@ module.exports = gql`
       title: String
       body: String
       publishedOn: String
-      document: String
+      document: Upload
     ): Newsletter
 
     removeNewsletter(id: ID!): Newsletter

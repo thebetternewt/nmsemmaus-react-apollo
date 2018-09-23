@@ -15,11 +15,20 @@ module.exports = {
       }
       return await Walk.findOne({ walkNumber }).exec();
     },
-    walks: async (parent, args, { user }) => {
+    walks: async (parent, { limit, afterDate }, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Walk.find().exec();
+
+      const searchParams = {};
+      if (afterDate) {
+        searchParams.startDate = { $gte: afterDate };
+      }
+
+      return await Walk.where({ ...searchParams })
+        .sort('-walkNumber')
+        .limit(limit)
+        .exec();
     }
   },
 
@@ -40,7 +49,6 @@ module.exports = {
       }
       const { id, ...updatedProperties } = args;
 
-      console.log(updatedProperties);
       const updatedWalk = await Walk.findOneAndUpdate(
         { _id: id },
         {

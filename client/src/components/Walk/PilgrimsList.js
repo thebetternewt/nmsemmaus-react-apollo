@@ -13,7 +13,7 @@ const styles = theme => ({
 });
 
 const PilgrimsList = props => {
-  const { classes, pilgrims } = props;
+  const { pilgrims } = props;
   const pilgrimListItems = pilgrims.map(pilgrim => (
     <ListItem key={pilgrim.id}>
       <Avatar>

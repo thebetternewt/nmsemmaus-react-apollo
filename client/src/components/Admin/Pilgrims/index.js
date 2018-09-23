@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CircularProgress, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import PilgrimList from './PilgrimList';
 import AddPilgrim from './AddPilgrim';

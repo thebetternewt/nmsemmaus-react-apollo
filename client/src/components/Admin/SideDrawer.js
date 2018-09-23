@@ -1,14 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import { CURRENT_USER_QUERY } from '../../apollo/queries';
 
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-import { items } from './tileData';
+import { items } from './sideDrawerItems';
 
 const drawerWidth = 240;
 

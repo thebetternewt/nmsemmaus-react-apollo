@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 
 import SideDrawer from './SideDrawer';
-import { CURRENT_USER_QUERY } from '../../apollo/queries';
 import Walks from './Walks';
+import Newsletters from './Newsletters';
 
 const drawerWidth = 240;
 
@@ -36,7 +35,7 @@ class Dashboard extends Component {
         <SideDrawer width={drawerWidth} />
         <main className={classes.content}>
           <Route exact path="/admin/walks" component={Walks} />
-          {/* <Route exact path="/dashboard/user-admin" component={Users} /> */}
+          <Route exact path="/admin/newsletters" component={Newsletters} />
           {/* <Route
             exact
             path="/dashboard/department-admin"

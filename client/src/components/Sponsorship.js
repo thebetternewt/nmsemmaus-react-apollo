@@ -309,7 +309,8 @@ const Sponsorship = () => {
               through{' '}
               <a
                 href="http://emmaus.upperroom.org/"
-                target="_blank"
+                target="_blank "
+                rel="noopener noreferrer"
                 style={{ color: 'blue', textDecoration: 'underline' }}
               >
                 The Upper Room website

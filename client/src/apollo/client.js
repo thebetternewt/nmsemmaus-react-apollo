@@ -1,4 +1,5 @@
 import ApolloClient from 'apollo-boost';
+import { createUploadLink } from 'apollo-upload-client';
 import { AUTH_QUERY, REDIRECT_QUERY } from './queries';
 
 const defaultState = {
@@ -9,6 +10,7 @@ const defaultState = {
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
+  link: createUploadLink(),
   clientState: {
     defaults: defaultState
   },

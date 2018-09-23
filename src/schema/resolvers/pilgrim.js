@@ -36,15 +36,15 @@ module.exports = {
       }
 
       const { id, ...updatedProperties } = args;
-      const [err, updatedPilgrim] = await Pilgrim.findOneAndUpdate(
+      const updatedPilgrim = await Pilgrim.findOneAndUpdate(
         { _id: id },
         {
           $set: { ...updatedProperties }
-        }
+        },
+        { new: true }
       ).exec();
-      if (err) {
-        throw new Error(err);
-      }
+
+      console.log(updatedPilgrim);
       return updatedPilgrim;
     },
     removePilgrim: async (parent, { id }, { user }, info) => {

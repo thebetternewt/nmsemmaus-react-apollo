@@ -1,40 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import WalkForm from './WalkForm';
 import { Mutation } from 'react-apollo';
-import { UPDATE_WALK } from '../../../apollo/mutations';
+import { UPDATE_NEWSLETTER } from '../../../apollo/mutations';
 
 import { Paper, CircularProgress } from '@material-ui/core';
+import NewsletterForm from './NewsletterForm';
 
-export default class EditWalk extends Component {
+export default class EditNewsletter extends Component {
   static getDerivedStateFromProps(nextProps) {
-    console.log(nextProps);
-    return { walk: nextProps.walk };
+    return { newsletter: nextProps.newsletter };
   }
 
   state = {
-    walk: this.props
+    newsletter: this.props.newsletter
   };
 
   render() {
-    const { walk } = this.state;
+    const { newsletter } = this.state;
     const { cancelEdit } = this.props;
 
     return (
       <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
-        <h3>Edit Walk #{walk.walkNumber}</h3>
-        <Mutation mutation={UPDATE_WALK}>
-          {(updateWalk, { data, loading, error }) => {
+        <h3>Edit Newsletter</h3>
+        <Mutation mutation={UPDATE_NEWSLETTER}>
+          {(updateNewsletter, { data, loading, error }) => {
             if (loading) {
               return <CircularProgress />;
             }
 
             return (
-              <WalkForm
-                submit={updateWalk}
+              <NewsletterForm
+                submit={updateNewsletter}
                 error={error}
-                walk={walk}
                 close={cancelEdit}
+                newsletter={newsletter}
               />
             );
           }}
@@ -44,7 +43,7 @@ export default class EditWalk extends Component {
   }
 }
 
-EditWalk.propTypes = {
-  walk: PropTypes.shape().isRequired,
+EditNewsletter.propTypes = {
+  newsletter: PropTypes.shape().isRequired,
   cancelEdit: PropTypes.func.isRequired
 };

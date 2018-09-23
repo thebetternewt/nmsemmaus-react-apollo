@@ -73,16 +73,6 @@ class WalkForm extends Component {
             onChange={this.handleInputChange}
           />
         </FormControl>
-        {/* <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="gender">Gender</InputLabel>
-          <Input
-            type="text"
-            id="gender"
-            name="gender"
-            value={gender}
-            onChange={this.handleInputChange}
-          />
-        </FormControl> */}
         <FormControl component="fieldset" style={{ marginTop: '1rem' }}>
           <FormLabel component="legend" style={{ fontSize: '0.8rem' }}>
             Gender

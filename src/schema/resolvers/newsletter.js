@@ -8,11 +8,24 @@ module.exports = {
       }
       return await Newsletter.findOne({ _id: id }).exec();
     },
-    newsletters: async (parent, args, { user }) => {
+    newsletters: async (parent, { limit, ...args }, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Newsletter.where({ ...args }).exec();
+
+      return await Newsletter.where({ ...args })
+        .sort('-publishedOn')
+        .limit(limit)
+        .exec();
+    },
+    latestNewsletter: async (parent, args, { user }) => {
+      if (!user) {
+        throw new Error('Not authorized');
+      }
+
+      return await Newsletter.findOne({})
+        .sort('-publishedOn')
+        .exec();
     }
   },
 
@@ -28,6 +41,7 @@ module.exports = {
       return await newsletter.save();
     },
     updateNewsletter: async (parent, args, { user }, info) => {
+      console.log('[args]:', args);
       if (!user.admin) {
         throw new Error('Not authorized');
       }
