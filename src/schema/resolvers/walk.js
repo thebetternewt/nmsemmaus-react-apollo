@@ -16,6 +16,7 @@ module.exports = {
       return await Walk.findOne({ walkNumber }).exec();
     },
     walks: async (parent, { limit, afterDate }, { user }) => {
+      console.log('[user]:', user);
       if (!user) {
         throw new Error('Not authorized');
       }
