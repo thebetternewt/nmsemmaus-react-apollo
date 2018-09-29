@@ -6,7 +6,7 @@ module.exports = gql`
     title: String!
     body: String!
     publishedOn: String!
-    documentLink: String
+    documentUrl: String
     createdAt: String
     updatedAt: String
   }
@@ -22,7 +22,7 @@ module.exports = gql`
       title: String!
       body: String!
       publishedOn: String!
-      document: Upload
+      documentUrl: String
     ): Newsletter!
 
     updateNewsletter(
@@ -30,7 +30,7 @@ module.exports = gql`
       title: String
       body: String
       publishedOn: String
-      document: Upload
+      documentUrl: String
     ): Newsletter
 
     removeNewsletter(id: ID!): Newsletter

@@ -118,17 +118,20 @@ const UPDATE_NEWSLETTER = gql`
     $title: String
     $body: String
     $publishedOn: String
+    $documentUrl: String
   ) {
     updateNewsletter(
       id: $id
       title: $title
       body: $body
       publishedOn: $publishedOn
+      documentUrl: $documentUrl
     ) {
       id
       title
       body
       publishedOn
+      documentUrl
       createdAt
       updatedAt
     }
@@ -143,6 +146,15 @@ const REMOVE_NEWSLETTER = gql`
   }
 `;
 
+const SIGN_S3 = gql`
+  mutation SignS3($filename: String!, $filetype: String!, $path: String!) {
+    signS3(filename: $filename, filetype: $filetype, path: $path) {
+      url
+      signedRequest
+    }
+  }
+`;
+
 export {
   ADD_WALK,
   UPDATE_WALK,
@@ -150,5 +162,6 @@ export {
   UPDATE_PILGRIM,
   ADD_NEWSLETTER,
   UPDATE_NEWSLETTER,
-  REMOVE_NEWSLETTER
+  REMOVE_NEWSLETTER,
+  SIGN_S3
 };

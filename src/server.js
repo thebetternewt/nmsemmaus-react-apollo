@@ -24,6 +24,7 @@ mongoose
       typeDefs,
       resolvers,
       playground,
+      cors: true,
       context: async ({ req }) => {
         // get the user token from the headers
         const authorization = req.headers.authorization || '';

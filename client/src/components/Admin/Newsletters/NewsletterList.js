@@ -27,10 +27,10 @@ class NewsletterList extends Component {
 
   handleRowSelect = id => {
     this.setState({ selectedId: id });
+    this.props.selectNewsletter(id);
   };
 
   render() {
-    const { selectNewsletter } = this.props;
     const { selectedId } = this.state;
 
     return (
@@ -65,7 +65,6 @@ class NewsletterList extends Component {
                               selected={newsletter.id === selectedId}
                               onClick={() => {
                                 this.handleRowSelect(newsletter.id);
-                                selectNewsletter(newsletter);
                               }}
                             >
                               <TableCell component="th" scope="row">

@@ -27,7 +27,8 @@ class NewsletterForm extends Component {
     id: this.props.newsletter.id || '',
     title: this.props.newsletter.title || '',
     body: this.props.newsletter.body || '',
-    publishedOn: this.props.newsletter.publishedOn || ''
+    publishedOn: this.props.newsletter.publishedOn || '',
+    documentUrl: this.props.newsletter.documentUrl || ''
   };
 
   handleInputChange = e => {
@@ -38,8 +39,12 @@ class NewsletterForm extends Component {
     this.setState({ body: value });
   };
 
+  setDocumentUrl = url => {
+    this.setState({ documentUrl: url });
+  };
+
   render() {
-    const { id, title, body, publishedOn } = this.state;
+    const { id, title, body, publishedOn, documentUrl } = this.state;
     const { submit, close, error, classes } = this.props;
 
     return (
@@ -51,7 +56,8 @@ class NewsletterForm extends Component {
               id,
               title,
               body,
-              publishedOn
+              publishedOn,
+              documentUrl
             },
             refetchQueries: ['NewslettersQuery']
           })
@@ -124,12 +130,17 @@ class NewsletterForm extends Component {
                 variant="raised"
                 color="secondary"
                 onClick={() => {
-                  removeNewsletter({
-                    variables: { id },
-                    refetchQueries: ['NewslettersQuery']
-                  })
-                    .then(close())
-                    .catch(err => console.log(err));
+                  if (window.confirm('Are you sure?')) {
+                    removeNewsletter({
+                      variables: { id },
+                      refetchQueries: ['NewslettersQuery']
+                    })
+                      .then(
+                        // TODO: Redirect with JS
+                        (window.location.href = '/admin/newsletters')
+                      )
+                      .catch(err => console.log(err));
+                  }
                 }}
                 className={classes.buttonMargins}
               >

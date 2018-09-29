@@ -9,7 +9,7 @@ class Newsletters extends Component {
   state = {
     showAddNewsletter: false,
     showEditNewsletter: false,
-    selectedNewsletter: null
+    selectedNewsletterId: null
   };
 
   showAddNewsletter = () => {
@@ -19,9 +19,9 @@ class Newsletters extends Component {
     this.setState({ showAddNewsletter: false });
   };
 
-  showEditNewsletter = newsletter => {
+  showEditNewsletter = id => {
     this.setState({
-      selectedNewsletter: newsletter,
+      selectedNewsletterId: id,
       showEditNewsletter: true,
       showAddNewsletter: false
     });
@@ -34,10 +34,11 @@ class Newsletters extends Component {
   };
 
   render() {
+    console.log(this.state);
     const {
       showAddNewsletter,
       showEditNewsletter,
-      selectedNewsletter
+      selectedNewsletterId
     } = this.state;
 
     return (
@@ -46,7 +47,7 @@ class Newsletters extends Component {
 
         {showEditNewsletter && (
           <EditNewsletter
-            newsletter={selectedNewsletter}
+            id={selectedNewsletterId}
             cancelEdit={this.hideEditNewsletter}
           />
         )}

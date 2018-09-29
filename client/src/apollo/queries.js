@@ -77,6 +77,7 @@ const NEWSLETTERS_QUERY = gql`
       title
       body
       publishedOn
+      documentUrl
       createdAt
       updatedAt
     }
@@ -90,6 +91,7 @@ const LATEST_NEWSLETTER_QUERY = gql`
       title
       body
       publishedOn
+      documentUrl
       createdAt
       updatedAt
     }
@@ -103,6 +105,7 @@ const NEWSLETTER_QUERY = gql`
       title
       body
       publishedOn
+      documentUrl
       createdAt
       updatedAt
     }

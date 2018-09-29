@@ -50,11 +50,10 @@ export default class PilgrimsListsIndex extends Component {
                 console.log(data);
                 const { walks } = data;
                 const walkCards = walks.map(walk => (
-                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Grid key={walk.id} item xs={12} sm={6} md={4} lg={3}>
                     <Link
                       to={`/pilgrim-lists/${walk.walkNumber}`}
                       style={{ width: '100%' }}
-                      key={walk.id}
                     >
                       <Card
                         elevation={22}

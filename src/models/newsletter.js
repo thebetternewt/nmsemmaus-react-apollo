@@ -18,7 +18,7 @@ module.exports = mongoose.model(
         type: String,
         required: true
       },
-      documentLink: {
+      documentUrl: {
         type: String
       }
     },

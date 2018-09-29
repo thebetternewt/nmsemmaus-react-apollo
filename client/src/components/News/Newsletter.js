@@ -6,7 +6,7 @@ import { Paper, Button } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 
 const Newsletter = props => {
-  const { title, body } = props.newsletter;
+  const { title, body, documentUrl } = props.newsletter;
 
   return (
     <div>
@@ -18,13 +18,17 @@ const Newsletter = props => {
           }}
         />
       </NewsletterPaper>
-      <Button
-        variant="raised"
-        color="primary"
-        style={{ margin: '1rem 0', width: '100%' }}
-      >
-        Download <CloudDownloadIcon style={{ marginLeft: '10px' }} />
-      </Button>
+      {documentUrl && (
+        <a href={documentUrl} target="_blank">
+          <Button
+            variant="raised"
+            color="primary"
+            style={{ margin: '1rem 0', width: '100%' }}
+          >
+            Download <CloudDownloadIcon style={{ marginLeft: '10px' }} />
+          </Button>
+        </a>
+      )}
     </div>
   );
 };
