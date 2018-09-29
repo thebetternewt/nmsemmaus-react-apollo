@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 
 import PilgrimList from './PilgrimList';
 import AddPilgrim from './AddPilgrim';
+import AddPilgrims from './AddPilgrims';
 import EditPilgrim from './EditPilgrim';
 
 class Pilgrims extends Component {
@@ -68,6 +69,8 @@ class Pilgrims extends Component {
               Add New Pilgrim
             </Button>
           )}
+
+        <AddPilgrims />
       </div>
     );
   }
