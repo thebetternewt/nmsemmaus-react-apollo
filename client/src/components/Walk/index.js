@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
-import { WALK_QUERY } from '../../apollo/queries';
 
 import { CircularProgress, Grid, Button } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import { WALK_QUERY } from '../../apollo/queries';
 import Hero from '../common/Hero';
 import PilgrimsList from './PilgrimsList';
 
 import candles from '../../images/candles.jpeg';
+import PilgrimListPdf from './PilgrimListPdf';
 
 const Walk = props => {
   const walkNumber = props.match.params.walk_number;
@@ -44,14 +45,10 @@ const Walk = props => {
                     >
                       <h2>Pilgrims</h2>
                       <PilgrimsList pilgrims={pilgrims} />
-                      <Button
-                        variant="raised"
-                        color="primary"
-                        style={{ marginTop: '2rem' }}
-                      >
-                        Download{' '}
-                        <CloudDownloadIcon style={{ marginLeft: '10px' }} />
-                      </Button>
+                      <PilgrimListPdf
+                        walkNumber={walkNumber}
+                        pilgrims={pilgrims}
+                      />
                     </Grid>
                     <Grid
                       item

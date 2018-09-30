@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 module.exports = mongoose.model(
@@ -8,18 +9,18 @@ module.exports = mongoose.model(
       username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
       },
       password: {
         type: String,
-        required: true
+        required: true,
       },
       admin: {
-        type: Boolean
-      }
+        type: Boolean,
+      },
     },
     {
-      timestamps: true
+      timestamps: true,
     }
   )
 );

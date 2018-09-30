@@ -31,6 +31,7 @@ class NewsletterForm extends Component {
     documentUrl: this.props.newsletter.documentUrl || '',
   };
 
+
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };

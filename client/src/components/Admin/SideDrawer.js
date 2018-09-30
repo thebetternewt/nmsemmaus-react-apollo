@@ -18,6 +18,7 @@ const styles = theme => ({
     width: drawerWidth,
     height: '100%',
   },
+
   toolbar: theme.mixins.toolbar,
   subheader: {
     textTransform: 'uppercase',

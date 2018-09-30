@@ -54,21 +54,21 @@ class Newsletters extends Component {
         )}
         {!showAddNewsletter &&
           !showEditNewsletter && (
-          <NewsletterList selectNewsletter={this.showEditNewsletter} />
-        )}
+            <NewsletterList selectNewsletter={this.showEditNewsletter} />
+          )}
         {showAddNewsletter && (
           <AddNewsletter cancelAdd={this.hideAddNewsletter} />
         )}
         {!showAddNewsletter &&
           !showEditNewsletter && (
-          <Button
-            variant="raised"
-            color="primary"
-            onClick={this.showAddNewsletter}
-          >
+            <Button
+              variant="raised"
+              color="primary"
+              onClick={this.showAddNewsletter}
+            >
               Add New Newsletter
           </Button>
-        )}
+          )}
       </div>
     );
   }

@@ -1,7 +1,6 @@
-module.exports = [
-  require('./pilgrim'),
-  require('./walk'),
-  require('./user'),
-  require('./newsletter'),
-  require('./s3Payload')
-];
+const Pilgrim = require('./pilgrim');
+const Walk = require('./walk');
+const User = require('./user');
+const Newsletter = require('./newsletter');
+
+module.exports = [Pilgrim, Walk, User, Newsletter];

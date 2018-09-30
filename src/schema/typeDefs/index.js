@@ -1,4 +1,10 @@
 const { gql } = require('apollo-server');
+const pilgrim = require('./pilgrim');
+const walk = require('./walk');
+const user = require('./user');
+const newsletter = require('./newsletter');
+const s3payload = require('./s3Payload');
+
 const base = gql`
   type Query {
     _: String
@@ -9,11 +15,4 @@ const base = gql`
   }
 `;
 
-module.exports = [
-  base,
-  require('./pilgrim'),
-  require('./walk'),
-  require('./user'),
-  require('./newsletter'),
-  require('./s3Payload')
-];
+module.exports = [base, pilgrim, walk, user, newsletter, s3payload];

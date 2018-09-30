@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 module.exports = mongoose.model(
@@ -8,21 +9,21 @@ module.exports = mongoose.model(
       walkNumber: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
       },
       gender: {
         type: String,
-        default: 'Men'
+        default: 'Men',
       },
       startDate: {
-        type: String
+        type: String,
       },
       endDate: {
-        type: String
-      }
+        type: String,
+      },
     },
     {
-      timestamps: true
+      timestamps: true,
     }
   )
 );

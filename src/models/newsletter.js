@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 module.exports = mongoose.model(
@@ -8,22 +9,22 @@ module.exports = mongoose.model(
       title: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
       },
       body: {
         type: String,
-        required: true
+        required: true,
       },
       publishedOn: {
         type: String,
-        required: true
+        required: true,
       },
       documentUrl: {
-        type: String
-      }
+        type: String,
+      },
     },
     {
-      timestamps: true
+      timestamps: true,
     }
   )
 );

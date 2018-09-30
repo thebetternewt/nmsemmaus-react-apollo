@@ -1,6 +1,11 @@
+const Pilgrim = require('./pilgrim');
+const Walk = require('./walk');
+const User = require('./user');
+const Newsletter = require('./newsletter');
+
 module.exports = {
-  Pilgrim: require('./pilgrim'),
-  Walk: require('./walk'),
-  User: require('./user'),
-  Newsletter: require('./newsletter')
+  Pilgrim,
+  Walk,
+  User,
+  Newsletter,
 };

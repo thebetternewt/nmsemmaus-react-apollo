@@ -1,12 +1,25 @@
-const dotenv = require('dotenv');
+require('dotenv').config();
+const express = require('express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const { ApolloServer } = require('apollo-server');
+const path = require('path');
+const { ApolloServer } = require('apollo-server-express');
+
 const { typeDefs, resolvers } = require('./schema');
 
 const { User } = require('./models');
 
-dotenv.config();
+const app = express();
+
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (_, res) => {
+    res.sendfile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 mongoose
   .connect(
@@ -16,11 +29,11 @@ mongoose
   .then(() => {
     const playground = {
       settings: {
-        'editor.cursorShape': 'line'
-      }
+        'editor.cursorShape': 'block',
+      },
     };
 
-    return new ApolloServer({
+    const server = new ApolloServer({
       typeDefs,
       resolvers,
       playground,
@@ -36,26 +49,31 @@ mongoose
 
         // add the user to the context
         return { user };
-      }
-    }).listen();
-  })
-  .then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
+      },
+    });
+
+    server.applyMiddleware({ app });
+
+    const port = process.env.PORT || 4000;
+
+    app.listen(port, () => {
+      console.log(`🚀  Server ready at localhost:${port}${server.graphqlPath}`);
+    });
   })
   .catch(console.error);
 
 const getUser = async token => {
   const { ok, result } = await new Promise(resolve =>
-    jwt.verify(token, process.env.JWT_SECRET, (err, result) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, jwtResult) => {
       if (err) {
         resolve({
           ok: false,
-          result: err
+          result: err,
         });
       } else {
         resolve({
           ok: true,
-          result
+          result: jwtResult,
         });
       }
     })
@@ -64,7 +82,6 @@ const getUser = async token => {
   if (ok) {
     const user = await User.findOne({ _id: result.id });
     return user;
-  } else {
-    return null;
   }
+  return null;
 };

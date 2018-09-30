@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 module.exports = mongoose.model(
@@ -7,25 +8,25 @@ module.exports = mongoose.model(
     {
       firstName: {
         type: String,
-        required: true
+        required: true,
       },
       lastName: {
         type: String,
-        required: true
+        required: true,
       },
       hometown: {
-        type: String
+        type: String,
       },
       sponsor: {
-        type: String
+        type: String,
       },
       walkNumber: {
         type: Number,
-        required: true
-      }
+        required: true,
+      },
     },
     {
-      timestamps: true
+      timestamps: true,
     }
   )
 );
