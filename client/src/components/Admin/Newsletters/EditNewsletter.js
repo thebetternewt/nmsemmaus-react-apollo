@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Query, Mutation } from 'react-apollo';
+import { Paper, CircularProgress, Button } from '@material-ui/core';
 import { NEWSLETTER_QUERY } from '../../../apollo/queries';
 import { UPDATE_NEWSLETTER } from '../../../apollo/mutations';
 
-import { Paper, CircularProgress, Button } from '@material-ui/core';
 import NewsletterForm from './NewsletterForm';
 import DocumentUploader from './DocumentUploader';
 
@@ -12,7 +12,7 @@ export default class EditNewsletter extends Component {
   state = {
     id: this.props.id,
     showEditMode: false,
-    showDocumentUpload: false
+    showDocumentUpload: false,
   };
 
   toggleEditMode = () => {
@@ -60,69 +60,68 @@ export default class EditNewsletter extends Component {
                     }}
                   </Mutation>
                 );
-              } else {
-                return (
-                  <Fragment>
-                    <h3>Detail:</h3>
-                    <p>
-                      <strong>Title:</strong> {title}
-                    </p>
-                    <p>
-                      <strong>Body:</strong> (click "Edit" to see body content)
-                    </p>
-                    <p>
-                      <strong>Publication Date:</strong> {publishedOn}
-                    </p>
-                    <p>
-                      <strong>Document:</strong>{' '}
-                      {documentUrl ? (
-                        <a
-                          href={documentUrl}
-                          target="_blank"
-                          style={{ color: 'blue', textDecoration: 'underline' }}
-                        >
-                          Click to view
-                        </a>
-                      ) : (
-                        'None'
-                      )}
-                      {!showDocumentUpload && (
-                        <Button
-                          variant="raised"
-                          style={{ marginLeft: '1rem' }}
-                          onClick={this.toggleDocumentUpload}
-                        >
-                          {documentUrl ? 'Change' : 'Upload document'}
-                        </Button>
-                      )}
-                    </p>
-
-                    {showDocumentUpload ? (
-                      <DocumentUploader
-                        newsletterId={id}
-                        close={this.toggleDocumentUpload}
-                      />
-                    ) : (
-                      <Fragment>
-                        <Button
-                          variant="raised"
-                          color="primary"
-                          onClick={this.toggleEditMode}
-                        >
-                          Edit Details
-                        </Button>
-                        <Button
-                          variant="raised"
-                          color="secondary"
-                          onClick={this.props.cancelEdit}
-                        >
-                          Close
-                        </Button>
-                      </Fragment>
-                    )}
-                  </Fragment>
-                );
               }
+              return (
+                <Fragment>
+                  <h3>Detail:</h3>
+                  <p>
+                    <strong>Title:</strong> {title}
+                  </p>
+                  <p>
+                    <strong>Body:</strong> (click "Edit" to see body content)
+                  </p>
+                  <p>
+                    <strong>Publication Date:</strong> {publishedOn}
+                  </p>
+                  <p>
+                    <strong>Document:</strong>{' '}
+                    {documentUrl ? (
+                      <a
+                        href={documentUrl}
+                        target="_blank"
+                        style={{ color: 'blue', textDecoration: 'underline' }}
+                      >
+                        Click to view
+                      </a>
+                    ) : (
+                      'None'
+                    )}
+                    {!showDocumentUpload && (
+                      <Button
+                        variant="raised"
+                        style={{ marginLeft: '1rem' }}
+                        onClick={this.toggleDocumentUpload}
+                      >
+                        {documentUrl ? 'Change' : 'Upload document'}
+                      </Button>
+                    )}
+                  </p>
+
+                  {showDocumentUpload ? (
+                    <DocumentUploader
+                      newsletterId={id}
+                      close={this.toggleDocumentUpload}
+                    />
+                  ) : (
+                    <Fragment>
+                      <Button
+                        variant="raised"
+                        color="primary"
+                        onClick={this.toggleEditMode}
+                      >
+                        Edit Details
+                      </Button>
+                      <Button
+                        variant="raised"
+                        color="secondary"
+                        onClick={this.props.cancelEdit}
+                      >
+                        Close
+                      </Button>
+                    </Fragment>
+                  )}
+                </Fragment>
+              );
             }
 
             return <p>Newsletter not found.</p>;
@@ -134,5 +133,5 @@ export default class EditNewsletter extends Component {
 }
 
 EditNewsletter.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 };

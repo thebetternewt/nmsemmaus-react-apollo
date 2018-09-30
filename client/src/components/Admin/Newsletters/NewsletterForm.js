@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 import { Mutation } from 'react-apollo';
-import { REMOVE_NEWSLETTER } from '../../../apollo/mutations';
 
 import {
   FormControl,
@@ -13,13 +12,14 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { REMOVE_NEWSLETTER } from '../../../apollo/mutations';
 
 import 'react-quill/dist/quill.snow.css';
 
 const styles = {
   buttonMargins: {
-    margin: '1rem 20px 1rem 0'
-  }
+    margin: '1rem 20px 1rem 0',
+  },
 };
 
 class NewsletterForm extends Component {
@@ -28,7 +28,7 @@ class NewsletterForm extends Component {
     title: this.props.newsletter.title || '',
     body: this.props.newsletter.body || '',
     publishedOn: this.props.newsletter.publishedOn || '',
-    documentUrl: this.props.newsletter.documentUrl || ''
+    documentUrl: this.props.newsletter.documentUrl || '',
   };
 
   handleInputChange = e => {
@@ -57,9 +57,9 @@ class NewsletterForm extends Component {
               title,
               body,
               publishedOn,
-              documentUrl
+              documentUrl,
             },
-            refetchQueries: ['NewslettersQuery']
+            refetchQueries: ['NewslettersQuery'],
           })
             .then(() => close())
             .catch(err => console.log(err));
@@ -87,7 +87,7 @@ class NewsletterForm extends Component {
         </FormControl>
 
         <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="body" shrink={true}>
+          <InputLabel htmlFor="body" shrink>
             Body
           </InputLabel>
           <ReactQuill
@@ -106,7 +106,7 @@ class NewsletterForm extends Component {
             value={publishedOn}
             onChange={this.handleInputChange}
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
           />
         </FormControl>
@@ -133,7 +133,7 @@ class NewsletterForm extends Component {
                   if (window.confirm('Are you sure?')) {
                     removeNewsletter({
                       variables: { id },
-                      refetchQueries: ['NewslettersQuery']
+                      refetchQueries: ['NewslettersQuery'],
                     })
                       .then(
                         // TODO: Redirect with JS
@@ -163,13 +163,13 @@ class NewsletterForm extends Component {
 }
 
 NewsletterForm.defaultProps = {
-  newsletter: {}
+  newsletter: {},
 };
 
 NewsletterForm.propTypes = {
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  newsletter: PropTypes.shape()
+  newsletter: PropTypes.shape(),
 };
 
 export default withStyles(styles)(NewsletterForm);

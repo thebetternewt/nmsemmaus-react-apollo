@@ -9,12 +9,13 @@ class Newsletters extends Component {
   state = {
     showAddNewsletter: false,
     showEditNewsletter: false,
-    selectedNewsletterId: null
+    selectedNewsletterId: null,
   };
 
   showAddNewsletter = () => {
     this.setState({ showAddNewsletter: true, showEditNewsletter: false });
   };
+
   hideAddNewsletter = () => {
     this.setState({ showAddNewsletter: false });
   };
@@ -23,13 +24,13 @@ class Newsletters extends Component {
     this.setState({
       selectedNewsletterId: id,
       showEditNewsletter: true,
-      showAddNewsletter: false
+      showAddNewsletter: false,
     });
   };
 
   hideEditNewsletter = () => {
     this.setState({
-      showEditNewsletter: false
+      showEditNewsletter: false,
     });
   };
 
@@ -38,7 +39,7 @@ class Newsletters extends Component {
     const {
       showAddNewsletter,
       showEditNewsletter,
-      selectedNewsletterId
+      selectedNewsletterId,
     } = this.state;
 
     return (
@@ -53,21 +54,21 @@ class Newsletters extends Component {
         )}
         {!showAddNewsletter &&
           !showEditNewsletter && (
-            <NewsletterList selectNewsletter={this.showEditNewsletter} />
-          )}
+          <NewsletterList selectNewsletter={this.showEditNewsletter} />
+        )}
         {showAddNewsletter && (
           <AddNewsletter cancelAdd={this.hideAddNewsletter} />
         )}
         {!showAddNewsletter &&
           !showEditNewsletter && (
-            <Button
-              variant="raised"
-              color="primary"
-              onClick={this.showAddNewsletter}
-            >
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this.showAddNewsletter}
+          >
               Add New Newsletter
-            </Button>
-          )}
+          </Button>
+        )}
       </div>
     );
   }

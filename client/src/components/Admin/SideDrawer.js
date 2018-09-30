@@ -6,7 +6,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-import { items } from './sideDrawerItems';
+import items from './sideDrawerItems';
 
 const drawerWidth = 240;
 
@@ -16,12 +16,12 @@ const styles = theme => ({
     top: 0,
     left: 0,
     width: drawerWidth,
-    height: '100%'
+    height: '100%',
   },
   toolbar: theme.mixins.toolbar,
   subheader: {
-    textTransform: 'uppercase'
-  }
+    textTransform: 'uppercase',
+  },
 });
 
 const SideDrawer = props => {
@@ -31,7 +31,7 @@ const SideDrawer = props => {
     <Drawer
       variant="permanent"
       classes={{
-        paper: classes.drawerPaper
+        paper: classes.drawerPaper,
       }}
     >
       <div className={classes.toolbar} />
@@ -50,7 +50,7 @@ const SideDrawer = props => {
 };
 
 SideDrawer.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.shape().isRequired,
 };
 
 export default withStyles(styles)(SideDrawer);

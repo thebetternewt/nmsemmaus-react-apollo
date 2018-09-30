@@ -4,19 +4,19 @@ import { Button } from '@material-ui/core';
 
 import PilgrimList from './PilgrimList';
 import AddPilgrim from './AddPilgrim';
-import AddPilgrims from './AddPilgrims';
 import EditPilgrim from './EditPilgrim';
 
 class Pilgrims extends Component {
   state = {
     showAddPilgrim: false,
     showEditPilgrim: false,
-    selectedPilgrim: null
+    selectedPilgrim: null,
   };
 
   showAddPilgrim = () => {
     this.setState({ showAddPilgrim: true, showEditPilgrim: false });
   };
+
   hideAddPilgrim = () => {
     this.setState({ showAddPilgrim: false });
   };
@@ -25,13 +25,13 @@ class Pilgrims extends Component {
     this.setState({
       selectedPilgrim: pilgrim,
       showEditPilgrim: true,
-      showAddPilgrim: false
+      showAddPilgrim: false,
     });
   };
 
   hideEditPilgrim = () => {
     this.setState({
-      showEditPilgrim: false
+      showEditPilgrim: false,
     });
   };
 
@@ -51,37 +51,35 @@ class Pilgrims extends Component {
         )}
         {!showAddPilgrim &&
           !showEditPilgrim && (
-            <PilgrimList
-              walkNumber={walkNumber}
-              selectPilgrim={this.showEditPilgrim}
-            />
-          )}
+          <PilgrimList
+            walkNumber={walkNumber}
+            selectPilgrim={this.showEditPilgrim}
+          />
+        )}
         {showAddPilgrim && (
           <AddPilgrim cancelAdd={this.hideAddPilgrim} walkNumber={walkNumber} />
         )}
         {!showAddPilgrim &&
           !showEditPilgrim && (
-            <Button
-              variant="raised"
-              color="primary"
-              onClick={this.showAddPilgrim}
-            >
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this.showAddPilgrim}
+          >
               Add New Pilgrim
-            </Button>
-          )}
-
-        <AddPilgrims />
+          </Button>
+        )}
       </div>
     );
   }
 }
 
 Pilgrims.defaultProps = {
-  walkNumber: null
+  walkNumber: null,
 };
 
 Pilgrims.propTypes = {
-  walkNumber: PropTypes.number
+  walkNumber: PropTypes.number,
 };
 
 export default Pilgrims;

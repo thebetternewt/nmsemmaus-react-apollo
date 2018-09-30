@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import NewsletterForm from './NewsletterForm';
 import { Mutation } from 'react-apollo';
-import { ADD_NEWSLETTER } from '../../../apollo/mutations';
-
 import { Paper, CircularProgress } from '@material-ui/core';
+import NewsletterForm from './NewsletterForm';
+import { ADD_NEWSLETTER } from '../../../apollo/mutations';
 
 export default class AddNewsletter extends Component {
   render() {

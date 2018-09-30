@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PilgrimForm from './PilgrimForm';
 import { Mutation } from 'react-apollo';
-import { UPDATE_PILGRIM } from '../../../apollo/mutations';
-
 import { Paper, CircularProgress } from '@material-ui/core';
+import PilgrimForm from './PilgrimForm';
+import { UPDATE_PILGRIM } from '../../../apollo/mutations';
 
 export default class EditPilgrim extends Component {
   static getDerivedStateFromProps(nextProps) {
@@ -12,7 +11,7 @@ export default class EditPilgrim extends Component {
   }
 
   state = {
-    pilgrim: this.props
+    pilgrim: this.props,
   };
 
   render() {
@@ -23,7 +22,7 @@ export default class EditPilgrim extends Component {
       <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
         <h3>Edit Pilgrim</h3>
         <Mutation mutation={UPDATE_PILGRIM}>
-          {(updatePilgrim, { data, loading, error }) => {
+          {(updatePilgrim, { loading, error }) => {
             if (loading) {
               return <CircularProgress />;
             }
@@ -44,6 +43,5 @@ export default class EditPilgrim extends Component {
 }
 
 EditPilgrim.propTypes = {
-  pilgrim: PropTypes.shape().isRequired,
-  cancelEdit: PropTypes.func.isRequired
+  cancelEdit: PropTypes.func.isRequired,
 };

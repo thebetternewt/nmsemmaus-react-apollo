@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { NEWSLETTERS_QUERY } from '../../../apollo/queries';
 
 import {
   CircularProgress,
@@ -10,24 +9,27 @@ import {
   TableHead,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { NEWSLETTERS_QUERY } from '../../../apollo/queries';
 
 const styles = {
   selected: {
-    backgroundColor: 'green'
-  }
+    backgroundColor: 'green',
+  },
 };
 
 class NewsletterList extends Component {
   state = {
-    selectedId: ''
+    selectedId: '',
   };
 
   handleRowSelect = id => {
+    const { selectNewsletter } = this.props;
+
     this.setState({ selectedId: id });
-    this.props.selectNewsletter(id);
+    selectNewsletter(id);
   };
 
   render() {
@@ -57,24 +59,22 @@ class NewsletterList extends Component {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {newsletters.map(newsletter => {
-                          return (
-                            <TableRow
-                              hover
-                              key={newsletter.id}
-                              selected={newsletter.id === selectedId}
-                              onClick={() => {
-                                this.handleRowSelect(newsletter.id);
-                              }}
-                            >
-                              <TableCell component="th" scope="row">
-                                {newsletter.title}
-                              </TableCell>
-                              <TableCell>{newsletter.publishedOn}</TableCell>
-                              <TableCell>{newsletter.updatedAt}</TableCell>
-                            </TableRow>
-                          );
-                        })}
+                        {newsletters.map(newsletter => (
+                          <TableRow
+                            hover
+                            key={newsletter.id}
+                            selected={newsletter.id === selectedId}
+                            onClick={() => {
+                              this.handleRowSelect(newsletter.id);
+                            }}
+                          >
+                            <TableCell component="th" scope="row">
+                              {newsletter.title}
+                            </TableCell>
+                            <TableCell>{newsletter.publishedOn}</TableCell>
+                            <TableCell>{newsletter.updatedAt}</TableCell>
+                          </TableRow>
+                        ))}
                       </TableBody>
                     </Table>
                   ) : (
@@ -93,7 +93,7 @@ class NewsletterList extends Component {
 }
 
 NewsletterList.propTypes = {
-  selectNewsletter: PropTypes.func.isRequired
+  selectNewsletter: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(NewsletterList);
