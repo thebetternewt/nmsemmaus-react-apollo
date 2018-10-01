@@ -1,6 +1,6 @@
-const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { User } = require('../../models');
 require('dotenv').config();
 
 module.exports = {
@@ -11,27 +11,27 @@ module.exports = {
       }
 
       // user is authenticated
-      return await User.findOne({ _id: user.id }).exec();
+      return User.findOne({ _id: user.id }).exec();
     },
     user: async (parent, { id }, { user }) => {
       if (!user.id === id && !user.admin) {
         throw new Error('Not authorized');
       }
-      return await User.findOne({ _id: id }).exec();
+      return User.findOne({ _id: id }).exec();
     },
     users: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
-      return await User.find().exec();
-    }
+      return User.find().exec();
+    },
   },
 
   Mutation: {
     signup: async (parent, { username, password }) => {
       const hashedPass = await bcrypt.hash(password, 10);
       const newUser = new User({ username, password: hashedPass });
-      return await newUser.save();
+      return newUser.save();
     },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username }).exec();
@@ -93,7 +93,7 @@ module.exports = {
         throw new Error('User not found');
       }
 
-      return removedUser._id;
-    }
-  }
+      return removedUser.id;
+    },
+  },
 };

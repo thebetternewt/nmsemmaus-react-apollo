@@ -2,10 +2,10 @@ const { Walk, Pilgrim } = require('../../models');
 
 module.exports = {
   Walk: {
-    pilgrims: async (parent, args) =>
-      await Pilgrim.where('walkNumber')
+    pilgrims: async parent =>
+      Pilgrim.where('walkNumber')
         .equals(parent.walkNumber)
-        .exec()
+        .exec(),
   },
 
   Query: {
@@ -13,7 +13,7 @@ module.exports = {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Walk.findOne({ walkNumber }).exec();
+      return Walk.findOne({ walkNumber }).exec();
     },
     walks: async (parent, { limit, afterDate }, { user }) => {
       console.log('[user]:', user);
@@ -26,25 +26,25 @@ module.exports = {
         searchParams.startDate = { $gte: afterDate };
       }
 
-      return await Walk.where({ ...searchParams })
+      return Walk.where({ ...searchParams })
         .sort('-walkNumber')
         .limit(limit)
         .exec();
-    }
+    },
   },
 
   Mutation: {
-    addWalk: async (parent, args, { user }, info) => {
+    addWalk: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
       const walk = new Walk({
-        ...args
+        ...args,
       });
 
-      return await walk.save();
+      return walk.save();
     },
-    updateWalk: async (parent, args, { user }, info) => {
+    updateWalk: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
@@ -53,7 +53,7 @@ module.exports = {
       const updatedWalk = await Walk.findOneAndUpdate(
         { _id: id },
         {
-          $set: { ...updatedProperties }
+          $set: { ...updatedProperties },
         },
         { new: true }
       ).exec();
@@ -64,7 +64,7 @@ module.exports = {
 
       return updatedWalk;
     },
-    removeWalk: async (parent, args, { user }, info) => {
+    removeWalk: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
@@ -73,6 +73,6 @@ module.exports = {
         throw new Error('Walk not found');
       }
       return removedWalk;
-    }
-  }
+    },
+  },
 };

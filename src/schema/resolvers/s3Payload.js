@@ -11,7 +11,7 @@ module.exports = {
       // AWS_SECRET_ACCESS_KEY
       const s3 = new aws.S3({
         signatureVersion: 'v4',
-        region: 'us-east-1'
+        region: 'us-east-1',
       });
 
       const s3Params = {
@@ -19,7 +19,7 @@ module.exports = {
         Key: `${path}/${filename}`,
         Expires: 60,
         ContentType: filetype,
-        ACL: 'public-read'
+        ACL: 'public-read',
       };
 
       const signedRequest = await s3.getSignedUrl('putObject', s3Params);
@@ -27,8 +27,8 @@ module.exports = {
 
       return {
         signedRequest,
-        url
+        url,
       };
-    }
-  }
+    },
+  },
 };

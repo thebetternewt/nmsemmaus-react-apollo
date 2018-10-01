@@ -6,14 +6,14 @@ module.exports = {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Newsletter.findOne({ _id: id }).exec();
+      return Newsletter.findOne({ _id: id }).exec();
     },
     newsletters: async (parent, { limit, ...args }, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
 
-      return await Newsletter.where({ ...args })
+      return Newsletter.where({ ...args })
         .sort('-publishedOn')
         .limit(limit)
         .exec();
@@ -23,34 +23,34 @@ module.exports = {
         throw new Error('Not authorized');
       }
 
-      return await Newsletter.findOne({})
+      return Newsletter.findOne({})
         .sort('-publishedOn')
         .exec();
-    }
+    },
   },
 
   Mutation: {
-    addNewsletter: async (parent, args, { user }, info) => {
+    addNewsletter: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
       const newsletter = new Newsletter({
-        ...args
+        ...args,
       });
 
-      return await newsletter.save();
+      return newsletter.save();
     },
-    updateNewsletter: async (parent, args, { user }, info) => {
+    updateNewsletter: async (parent, args, { user }) => {
       console.log('[args]:', args);
       if (!user.admin) {
         throw new Error('Not authorized');
       }
       const { id, ...updatedProperties } = args;
 
-      const updatedNewsletter = await Newsletter.findOneAndUpdate(
+      const updatedNewsletter = Newsletter.findOneAndUpdate(
         { _id: id },
         {
-          $set: { ...updatedProperties }
+          $set: { ...updatedProperties },
         },
         { new: true }
       ).exec();
@@ -61,17 +61,17 @@ module.exports = {
 
       return updatedNewsletter;
     },
-    removeNewsletter: async (parent, { id }, { user }, info) => {
+    removeNewsletter: async (parent, { id }, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
       const removedNewsletter = await Newsletter.findOneAndRemove({
-        _id: id
+        _id: id,
       }).exec();
       if (!removedNewsletter) {
         throw new Error('Newsletter not found');
       }
       return removedNewsletter;
-    }
-  }
+    },
+  },
 };

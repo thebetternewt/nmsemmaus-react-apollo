@@ -2,8 +2,8 @@ const { Pilgrim, Walk } = require('../../models');
 
 module.exports = {
   Pilgrim: {
-    walk: async (parent, args) =>
-      await Walk.findOne({ walkNumber: parent.walkNumber }).exec()
+    walk: async parent =>
+      Walk.findOne({ walkNumber: parent.walkNumber }).exec(),
   },
 
   Query: {
@@ -11,26 +11,26 @@ module.exports = {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Pilgrim.findOne({ _id: id }).exec();
+      return Pilgrim.findOne({ _id: id }).exec();
     },
     pilgrims: async (parent, args, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return await Pilgrim.find().exec();
-    }
+      return Pilgrim.find().exec();
+    },
   },
 
   Mutation: {
-    addPilgrim: async (parent, args, { user }, info) => {
+    addPilgrim: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
 
       const pilgrim = new Pilgrim({ ...args });
-      return await pilgrim.save();
+      return pilgrim.save();
     },
-    updatePilgrim: async (parent, args, { user }, info) => {
+    updatePilgrim: async (parent, args, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
@@ -39,7 +39,7 @@ module.exports = {
       const updatedPilgrim = await Pilgrim.findOneAndUpdate(
         { _id: id },
         {
-          $set: { ...updatedProperties }
+          $set: { ...updatedProperties },
         },
         { new: true }
       ).exec();
@@ -47,7 +47,7 @@ module.exports = {
       console.log(updatedPilgrim);
       return updatedPilgrim;
     },
-    removePilgrim: async (parent, { id }, { user }, info) => {
+    removePilgrim: async (parent, { id }, { user }) => {
       if (!user.admin) {
         throw new Error('Not authorized');
       }
@@ -57,6 +57,6 @@ module.exports = {
         throw new Error('Pilgrim not found');
       }
       return removedPilgrim;
-    }
-  }
+    },
+  },
 };

@@ -4,6 +4,7 @@ const walk = require('./walk');
 const user = require('./user');
 const newsletter = require('./newsletter');
 const s3payload = require('./s3Payload');
+const board = require('./board');
 
 const base = gql`
   type Query {
@@ -15,4 +16,4 @@ const base = gql`
   }
 `;
 
-module.exports = [base, pilgrim, walk, user, newsletter, s3payload];
+module.exports = [base, pilgrim, walk, user, newsletter, s3payload, board];
