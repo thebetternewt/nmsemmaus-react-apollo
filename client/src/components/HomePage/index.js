@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { Button, Paper, Grid } from '@material-ui/core';
 import { isAuthenticated } from '../../apollo/client';
 
 import Section from '../common/Section';
-import Container from '../common/ContentContainer';
 import Hero from '../common/Hero';
 import Separator from '../UI/Separator';
 import { RED, GREEN, BLUE } from '../UI/colors';
-import { Button, Paper, Grid } from '@material-ui/core';
 import UpcomingWalks from './UpcomingWalks';
 import LinksCard from './LinksCard';
 
@@ -114,11 +113,10 @@ export default () => (
               style={{
                 backgroundColor: 'lightgreen',
                 color: '#333',
-                // marginTop: '2rem',
                 padding: '15px',
                 width: '100%',
                 display: 'flex',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               Welcome to the North MS Emmaus Community!
@@ -129,9 +127,9 @@ export default () => (
           </h2>
           <h4>
             <small>
-              The scriptures remind us that, "Where there is no vision, the
-              people perish" (Prov. 29: 18 KJV). A vision of where we want to go
-              gives us a sense of both direction and purpose.
+              The scriptures remind us that, &ldquo;Where there is no vision,
+              the people perish&rdquo; (Prov. 29: 18 KJV). A vision of where we
+              want to go gives us a sense of both direction and purpose.
             </small>
           </h4>
           <p style={{ textAlign: 'center' }}>
@@ -173,7 +171,6 @@ export default () => (
           <LinksCard />
         </Grid>
       </Grid>
-      {/* </Container> */}
     </Section>
   </HomePage>
 );

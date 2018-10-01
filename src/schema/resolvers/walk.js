@@ -15,7 +15,7 @@ module.exports = {
       }
       return Walk.findOne({ walkNumber }).exec();
     },
-    walks: async (parent, { limit, afterDate }, { user }) => {
+    walks: async (parent, { offset, limit, afterDate }, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
@@ -27,6 +27,7 @@ module.exports = {
 
       return Walk.where({ ...searchParams })
         .sort('-walkNumber')
+        .skip(offset)
         .limit(limit)
         .exec();
     },

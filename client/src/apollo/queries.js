@@ -47,8 +47,8 @@ const WALK_QUERY = gql`
 `;
 
 const WALKS_QUERY = gql`
-  query WalksQuery {
-    walks {
+  query WalksQuery($offset: Int, $limit: Int) {
+    walks(offset: $offset, limit: $limit) {
       id
       walkNumber
       startDate
