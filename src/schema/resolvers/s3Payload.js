@@ -4,8 +4,11 @@ const s3Bucket = process.env.S3_BUCKET;
 
 module.exports = {
   Mutation: {
-    signS3: async (parent, { filename, filetype, path }) => {
-      // TODO: Restrict to ADMIN only.
+    signS3: async (parent, { filename, filetype, path }, { user }) => {
+      // Restrict to ADMIN only.
+      if (!user || !user.admin) {
+        throw new Error('Not authorized');
+      }
 
       // AWS_ACCESS_KEY_ID
       // AWS_SECRET_ACCESS_KEY

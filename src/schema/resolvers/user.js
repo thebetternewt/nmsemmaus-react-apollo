@@ -30,11 +30,16 @@ module.exports = {
   Mutation: {
     signup: async (parent, { username, password }) => {
       const hashedPass = await bcrypt.hash(password, 10);
-      const newUser = new User({ username, password: hashedPass });
+      const newUser = new User({
+        username: username.toLowerCase(),
+        password: hashedPass,
+      });
       return newUser.save();
     },
     login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username }).exec();
+      const user = await User.findOne({
+        username: username.toLowerCase(),
+      }).exec();
 
       if (!user) {
         throw new Error('No user with that username');
@@ -55,7 +60,7 @@ module.exports = {
     updateUser: async (parent, args, { user }) => {
       const { id, admin, password, ...updatedProperties } = args;
 
-      if (!user.id === id && !user.admin) {
+      if (!user || (!user.id === id && !user.admin)) {
         throw new Error('Not authorized');
       }
 
