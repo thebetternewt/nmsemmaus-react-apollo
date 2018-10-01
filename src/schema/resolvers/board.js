@@ -2,11 +2,11 @@ const { Board } = require('../../models');
 
 module.exports = {
   Query: {
-    board: async (parent, { id }, { user }) => {
+    board: async (parent, { year }, { user }) => {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return Board.findOne({ _id: id }).exec();
+      return Board.findOne({ year }).exec();
     },
     boards: async (parent, { limit, ...args }, { user }) => {
       if (!user) {

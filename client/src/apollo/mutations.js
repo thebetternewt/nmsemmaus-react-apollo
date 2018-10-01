@@ -155,6 +155,64 @@ const SIGN_S3 = gql`
   }
 `;
 
+const ADD_BOARD = gql`
+  mutation AddBoard(
+    $year: ID!
+    $chairman: String
+    $viceChairman: String
+    $secretary: String
+    $treasurer: String
+    $communitySpiritualDirector: String
+    $exOfficio: String
+  ) {
+    addBoard(
+      year: $year
+      chairman: $chairman
+      viceChairman: $viceChairman
+      secretary: $secretary
+      treasurer: $treasurer
+      communitySpiritualDirector: $communitySpiritualDirector
+      exOfficio: $exOfficio
+    ) {
+      id
+    }
+  }
+`;
+
+const UPDATE_BOARD = gql`
+  mutation UpdateBoard(
+    $id: ID!
+    $year: ID
+    $chairman: String
+    $viceChairman: String
+    $secretary: String
+    $treasurer: String
+    $communitySpiritualDirector: String
+    $exOfficio: String
+  ) {
+    updateBoard(
+      id: $id
+      year: $year
+      chairman: $chairman
+      viceChairman: $viceChairman
+      secretary: $secretary
+      treasurer: $treasurer
+      communitySpiritualDirector: $communitySpiritualDirector
+      exOfficio: $exOfficio
+    ) {
+      id
+    }
+  }
+`;
+
+const REMOVE_BOARD = gql`
+  mutation RemoveBoard($id: ID!) {
+    removeBoard(id: $id) {
+      id
+    }
+  }
+`;
+
 export {
   ADD_WALK,
   UPDATE_WALK,
@@ -163,5 +221,8 @@ export {
   ADD_NEWSLETTER,
   UPDATE_NEWSLETTER,
   REMOVE_NEWSLETTER,
-  SIGN_S3
+  SIGN_S3,
+  ADD_BOARD,
+  UPDATE_BOARD,
+  REMOVE_BOARD,
 };

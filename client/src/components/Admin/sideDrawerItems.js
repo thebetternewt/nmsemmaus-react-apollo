@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import MailIcon from '@material-ui/icons/Mail';
 import GroupIcon from '@material-ui/icons/Group';
+import SchoolIcon from '@material-ui/icons/School';
 
 export default (
   <div>
@@ -17,6 +18,14 @@ export default (
         <ListItemText primary="Walks" />
       </ListItem>
     </Link>
+    <Link to="/admin/pilgrims">
+      <ListItem button>
+        <ListItemIcon>
+          <GroupIcon />
+        </ListItemIcon>
+        <ListItemText primary="Pilgrims Upload" />
+      </ListItem>
+    </Link>
     <Link to="/admin/newsletters">
       <ListItem button>
         <ListItemIcon>
@@ -25,12 +34,12 @@ export default (
         <ListItemText primary="Newsletters" />
       </ListItem>
     </Link>
-    <Link to="/admin/pilgrims">
+    <Link to="/admin/boards">
       <ListItem button>
         <ListItemIcon>
-          <GroupIcon />
+          <SchoolIcon />
         </ListItemIcon>
-        <ListItemText primary="Pilgrims" />
+        <ListItemText primary="Boards" />
       </ListItem>
     </Link>
   </div>

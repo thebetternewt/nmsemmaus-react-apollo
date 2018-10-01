@@ -112,6 +112,50 @@ const NEWSLETTER_QUERY = gql`
   }
 `;
 
+const BOARD_QUERY = gql`
+  query BoardQuery($year: ID!) {
+    board(year: $year) {
+      id
+      year
+      chairman
+      viceChairman
+      treasurer
+      secretary
+      communitySpiritualDirector
+      exOfficio
+    }
+  }
+`;
+const CURRENT_BOARD = gql`
+  query CurrentBoardQuery {
+    currentBoard {
+      id
+      year
+      chairman
+      viceChairman
+      treasurer
+      secretary
+      communitySpiritualDirector
+      exOfficio
+    }
+  }
+`;
+
+const BOARDS_QUERY = gql`
+  query BoardsQuery($limit: Int) {
+    boards(limit: $limit) {
+      id
+      year
+      chairman
+      viceChairman
+      treasurer
+      secretary
+      communitySpiritualDirector
+      exOfficio
+    }
+  }
+`;
+
 export {
   LOGIN_MUTATION,
   AUTH_QUERY,
@@ -122,5 +166,8 @@ export {
   UPCOMING_WALKS_QUERY,
   NEWSLETTERS_QUERY,
   LATEST_NEWSLETTER_QUERY,
-  NEWSLETTER_QUERY
+  NEWSLETTER_QUERY,
+  CURRENT_BOARD,
+  BOARD_QUERY,
+  BOARDS_QUERY,
 };

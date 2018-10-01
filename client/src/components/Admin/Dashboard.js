@@ -7,6 +7,7 @@ import SideDrawer from './SideDrawer';
 import Walks from './Walks';
 import Newsletters from './Newsletters';
 import PilgrimUpload from './Pilgrims/PilgrimUpload';
+import Boards from './Boards';
 
 const drawerWidth = 240;
 
@@ -38,6 +39,7 @@ const Dashboard = props => {
         <Route exact path="/admin/walks" component={Walks} />
         <Route exact path="/admin/newsletters" component={Newsletters} />
         <Route exact path="/admin/pilgrims" component={PilgrimUpload} />
+        <Route exact path="/admin/boards" component={Boards} />
       </main>
     </div>
   );
