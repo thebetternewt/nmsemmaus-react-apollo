@@ -17,7 +17,6 @@ import Walks from './components/Walks';
 import Walk from './components/Walks/Walk';
 import Sponsorship from './components/Sponsorship';
 import Admin from './components/Admin';
-
 import theme from './components/common/MuiTheme';
 
 // Check for token in LS
