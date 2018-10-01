@@ -4,30 +4,30 @@ import { AUTH_QUERY, REDIRECT_QUERY } from './queries';
 const defaultState = {
   isAuthenticated: false,
   user: null,
-  redirectPath: null
+  redirectPath: null,
 };
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: '/graphql',
   clientState: {
-    defaults: defaultState
+    defaults: defaultState,
   },
   request: operation => {
     const token = localStorage.getItem('token');
     operation.setContext({
       headers: {
-        authorization: `Bearer ${token}`
-      }
+        authorization: `Bearer ${token}`,
+      },
     });
-  }
+  },
 });
 
 const setAuthenticatedUser = userData => {
   client.cache.writeData({
     data: {
       isAuthenticated: true,
-      user: { __typename: 'user', ...userData }
-    }
+      user: { __typename: 'user', ...userData },
+    },
   });
 
   // const { user } = client.cache.readQuery({ query: CURRENT_USER_QUERY });
@@ -35,10 +35,10 @@ const setAuthenticatedUser = userData => {
 };
 
 const isAuthenticated = () => {
-  const { isAuthenticated } = client.readQuery({
-    query: AUTH_QUERY
+  const { isAuthenticated: authenticated } = client.readQuery({
+    query: AUTH_QUERY,
   });
-  return isAuthenticated;
+  return authenticated;
 };
 
 const logOutUser = async () => {
@@ -49,14 +49,14 @@ const logOutUser = async () => {
 const setRedirectPath = redirectPath => {
   client.cache.writeData({
     data: {
-      redirectPath
-    }
+      redirectPath,
+    },
   });
 };
 
 const getRedirectPath = () => {
   const { redirectPath } = client.readQuery({
-    query: REDIRECT_QUERY
+    query: REDIRECT_QUERY,
   });
   return redirectPath;
 };
@@ -67,5 +67,5 @@ export {
   setAuthenticatedUser,
   logOutUser,
   setRedirectPath,
-  getRedirectPath
+  getRedirectPath,
 };
