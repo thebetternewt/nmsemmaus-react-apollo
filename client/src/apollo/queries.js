@@ -28,6 +28,19 @@ const REDIRECT_QUERY = gql`
   }
 `;
 
+const PILGRIM_QUERY = gql`
+  query PilgrimQuery($id: ID!) {
+    pilgrim(id: $id) {
+      id
+      lastName
+      firstName
+      hometown
+      sponsor
+      walkNumber
+    }
+  }
+`;
+
 const WALK_QUERY = gql`
   query WalkQuery($walkNumber: Int!) {
     walk(walkNumber: $walkNumber) {
@@ -161,6 +174,7 @@ export {
   AUTH_QUERY,
   REDIRECT_QUERY,
   CURRENT_USER_QUERY,
+  PILGRIM_QUERY,
   WALK_QUERY,
   WALKS_QUERY,
   UPCOMING_WALKS_QUERY,

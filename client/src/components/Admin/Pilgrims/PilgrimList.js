@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { WALK_QUERY } from '../../../apollo/queries';
 
 import {
   CircularProgress,
@@ -10,28 +9,43 @@ import {
   TableHead,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  TablePagination,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { WALK_QUERY } from '../../../apollo/queries';
 
 const styles = {
   selected: {
-    backgroundColor: 'green'
-  }
+    backgroundColor: 'green',
+  },
 };
 
 class PilgrimList extends Component {
   state = {
-    selectedId: ''
+    selectedId: '',
+    page: 0,
+    rowsPerPage: 5,
   };
 
   handleRowSelect = id => {
+    const { selectPilgrim } = this.props;
+
     this.setState({ selectedId: id });
+    selectPilgrim(id);
+  };
+
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
+
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
   };
 
   render() {
-    const { walkNumber, selectPilgrim } = this.props;
-    const { selectedId } = this.state;
+    const { walkNumber } = this.props;
+    const { selectedId, page, rowsPerPage } = this.state;
 
     return (
       <div>
@@ -45,42 +59,62 @@ class PilgrimList extends Component {
 
             if (data) {
               const {
-                walk: { pilgrims }
+                walk: { pilgrims },
               } = data;
               console.log(pilgrims);
               return (
                 <Paper elevation={12} style={{ margin: '2rem 0', padding: 15 }}>
                   {pilgrims.length > 0 ? (
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Name</TableCell>
-                          <TableCell>Hometown</TableCell>
-                          <TableCell>Sponsor</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {pilgrims.map(pilgrim => {
-                          return (
-                            <TableRow
-                              hover
-                              key={pilgrim.id}
-                              selected={pilgrim.id === selectedId}
-                              onClick={() => {
-                                this.handleRowSelect(pilgrim.id);
-                                selectPilgrim(pilgrim);
-                              }}
-                            >
-                              <TableCell component="th" scope="row">
-                                {pilgrim.firstName} {pilgrim.lastName}
-                              </TableCell>
-                              <TableCell>{pilgrim.hometown}</TableCell>
-                              <TableCell>{pilgrim.sponsor}</TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
+                    <div>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Last Name</TableCell>
+                            <TableCell>First Name</TableCell>
+                            <TableCell>Hometown</TableCell>
+                            <TableCell>Sponsor</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {pilgrims
+                            .slice(
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
+                            .map(pilgrim => (
+                              <TableRow
+                                hover
+                                key={pilgrim.id}
+                                selected={pilgrim.id === selectedId}
+                                onClick={() => {
+                                  this.handleRowSelect(pilgrim.id);
+                                }}
+                              >
+                                <TableCell component="th" scope="row">
+                                  {pilgrim.lastName}
+                                </TableCell>
+                                <TableCell>{pilgrim.firstName}</TableCell>
+                                <TableCell>{pilgrim.hometown}</TableCell>
+                                <TableCell>{pilgrim.sponsor}</TableCell>
+                              </TableRow>
+                            ))}
+                        </TableBody>
+                      </Table>
+                      <TablePagination
+                        component="div"
+                        count={pilgrims.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        backIconButtonProps={{
+                          'aria-label': 'Previous Page',
+                        }}
+                        nextIconButtonProps={{
+                          'aria-label': 'Next Page',
+                        }}
+                        onChangePage={this.handleChangePage}
+                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                      />
+                    </div>
                   ) : (
                     <p>No pilgrims yet!</p>
                   )}
@@ -98,7 +132,7 @@ class PilgrimList extends Component {
 
 PilgrimList.propTypes = {
   walkNumber: PropTypes.number.isRequired,
-  selectPilgrim: PropTypes.func.isRequired
+  selectPilgrim: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(PilgrimList);

@@ -3,42 +3,41 @@ import { Button } from '@material-ui/core';
 
 import NewsletterList from './NewsletterList';
 import AddNewsletter from './AddNewsletter';
-import EditNewsletter from './EditNewsletter';
+import Newsletter from './Newsletter';
 
 class Newsletters extends Component {
   state = {
     showAddNewsletter: false,
-    showEditNewsletter: false,
+    showNewsletter: false,
     selectedNewsletterId: null,
   };
 
   showAddNewsletter = () => {
-    this.setState({ showAddNewsletter: true, showEditNewsletter: false });
+    this.setState({ showAddNewsletter: true, showNewsletter: false });
   };
 
   hideAddNewsletter = () => {
     this.setState({ showAddNewsletter: false });
   };
 
-  showEditNewsletter = id => {
+  showNewsletter = id => {
     this.setState({
       selectedNewsletterId: id,
-      showEditNewsletter: true,
+      showNewsletter: true,
       showAddNewsletter: false,
     });
   };
 
-  hideEditNewsletter = () => {
+  hideNewsletter = () => {
     this.setState({
-      showEditNewsletter: false,
+      showNewsletter: false,
     });
   };
 
   render() {
-    console.log(this.state);
     const {
       showAddNewsletter,
-      showEditNewsletter,
+      showNewsletter,
       selectedNewsletterId,
     } = this.state;
 
@@ -46,29 +45,27 @@ class Newsletters extends Component {
       <div>
         <h2>Manage Newsletters</h2>
 
-        {showEditNewsletter && (
-          <EditNewsletter
+        {showNewsletter && (
+          <Newsletter
             id={selectedNewsletterId}
-            cancelEdit={this.hideEditNewsletter}
+            cancelEdit={this.hideNewsletter}
           />
         )}
-        {!showAddNewsletter &&
-          !showEditNewsletter && (
-            <NewsletterList selectNewsletter={this.showEditNewsletter} />
-          )}
+        {!(showAddNewsletter || showNewsletter) && (
+          <NewsletterList selectNewsletter={this.showNewsletter} />
+        )}
         {showAddNewsletter && (
           <AddNewsletter cancelAdd={this.hideAddNewsletter} />
         )}
-        {!showAddNewsletter &&
-          !showEditNewsletter && (
-            <Button
-              variant="raised"
-              color="primary"
-              onClick={this.showAddNewsletter}
-            >
-              Add New Newsletter
+        {!(showAddNewsletter || showNewsletter) && (
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this.showAddNewsletter}
+          >
+            Add New Newsletter
           </Button>
-          )}
+        )}
       </div>
     );
   }

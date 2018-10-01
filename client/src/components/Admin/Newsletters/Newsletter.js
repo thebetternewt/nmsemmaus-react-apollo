@@ -8,23 +8,24 @@ import { UPDATE_NEWSLETTER } from '../../../apollo/mutations';
 import NewsletterForm from './NewsletterForm';
 import DocumentUploader from './DocumentUploader';
 
-export default class EditNewsletter extends Component {
+export default class Newsletter extends Component {
   state = {
-    id: this.props.id,
+    id: this.props.id, // eslint-disable-line react/destructuring-assignment
     showEditMode: false,
     showDocumentUpload: false,
   };
 
   toggleEditMode = () => {
-    this.setState({ showEditMode: !this.state.showEditMode });
+    const { showEditMode } = this.state;
+    this.setState({ showEditMode: !showEditMode });
   };
 
   toggleDocumentUpload = () => {
-    this.setState({ showDocumentUpload: !this.state.showDocumentUpload });
+    const { showDocumentUpload } = this.state;
+    this.setState({ showDocumentUpload: !showDocumentUpload });
   };
 
   render() {
-    console.log('[editNewsletter state]:', this.state);
     const { id, showEditMode, showDocumentUpload } = this.state;
 
     return (
@@ -37,17 +38,14 @@ export default class EditNewsletter extends Component {
 
             if (data && data.newsletter) {
               const { title, publishedOn, documentUrl } = data.newsletter;
-              console.log(showEditMode);
 
               if (showEditMode) {
                 return (
                   <Mutation mutation={UPDATE_NEWSLETTER}>
-                    {(updateNewsletter, { loading, error }) => {
-                      if (loading) {
+                    {(updateNewsletter, { loading: updating, error }) => {
+                      if (updating) {
                         return <CircularProgress />;
                       }
-
-                      console.log('[id from form]:', id);
 
                       return (
                         <NewsletterForm
@@ -133,6 +131,6 @@ export default class EditNewsletter extends Component {
   }
 }
 
-EditNewsletter.propTypes = {
+Newsletter.propTypes = {
   id: PropTypes.string.isRequired,
 };

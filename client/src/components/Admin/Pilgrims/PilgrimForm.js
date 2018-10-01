@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   buttonMargins: {
-    margin: '1rem 20px 1rem 0'
-  }
+    margin: '1rem 20px 1rem 0',
+  },
 };
 
 class PilgrimForm extends Component {
@@ -16,7 +16,7 @@ class PilgrimForm extends Component {
     lastName: this.props.pilgrim.lastName || '',
     hometown: this.props.pilgrim.hometown || '',
     sponsor: this.props.pilgrim.sponsor || '',
-    walkNumber: this.props.pilgrim.walkNumber || this.props.walkNumber
+    walkNumber: this.props.pilgrim.walkNumber || this.props.walkNumber,
   };
 
   handleInputChange = e => {
@@ -30,7 +30,7 @@ class PilgrimForm extends Component {
       lastName,
       hometown,
       sponsor,
-      walkNumber
+      walkNumber,
     } = this.state;
     const { submit, close, error, classes } = this.props;
 
@@ -48,9 +48,9 @@ class PilgrimForm extends Component {
               lastName,
               hometown,
               sponsor,
-              walkNumber
+              walkNumber,
             },
-            refetchQueries: ['WalkQuery']
+            refetchQueries: ['WalkQuery'],
           })
             .then(() => close())
             .catch(err => console.log(err));
@@ -132,13 +132,13 @@ class PilgrimForm extends Component {
 }
 
 PilgrimForm.defaultProps = {
-  pilgrim: {}
+  pilgrim: {},
 };
 
 PilgrimForm.propTypes = {
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  pilgrim: PropTypes.shape()
+  pilgrim: PropTypes.shape(),
 };
 
 export default withStyles(styles)(PilgrimForm);

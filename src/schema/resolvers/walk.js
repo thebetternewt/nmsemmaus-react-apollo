@@ -5,6 +5,8 @@ module.exports = {
     pilgrims: async parent =>
       Pilgrim.where('walkNumber')
         .equals(parent.walkNumber)
+        .collation({ locale: 'en', strength: 2 })
+        .sort({ lastName: 1, firstName: 1 })
         .exec(),
   },
 

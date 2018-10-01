@@ -17,7 +17,10 @@ module.exports = {
       if (!user) {
         throw new Error('Not authorized');
       }
-      return Pilgrim.find().exec();
+      return Pilgrim.where({ ...args })
+        .collation({ locale: 'en', strength: 2 })
+        .sort({ lastName: 1, firstName: 1 })
+        .exec();
     },
   },
 
