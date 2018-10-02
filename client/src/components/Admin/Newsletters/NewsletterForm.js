@@ -9,7 +9,7 @@ import {
   Input,
   TextField,
   Button,
-  CircularProgress
+  CircularProgress,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { REMOVE_NEWSLETTER } from '../../../apollo/mutations';
@@ -24,13 +24,14 @@ const styles = {
 
 class NewsletterForm extends Component {
   state = {
+    /* eslint-disable react/destructuring-assignment */
     id: this.props.newsletter.id || '',
     title: this.props.newsletter.title || '',
     body: this.props.newsletter.body || '',
     publishedOn: this.props.newsletter.publishedOn || '',
     documentUrl: this.props.newsletter.documentUrl || '',
+    /* eslint-enable react/destructuring-assignment */
   };
-
 
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -69,8 +70,8 @@ class NewsletterForm extends Component {
         {error && (
           <pre style={{ margin: '1rem', color: 'red' }}>
             Error:{' '}
-            {error.graphQLErrors.map(({ message }, i) => (
-              <span key={i}>{message}</span>
+            {error.graphQLErrors.map(({ message }) => (
+              <span key={message}>{message}</span>
             ))}
           </pre>
         )}
@@ -121,7 +122,7 @@ class NewsletterForm extends Component {
           Submit
         </Button>
         <Mutation mutation={REMOVE_NEWSLETTER}>
-          {(removeNewsletter, { error, loading }) => {
+          {(removeNewsletter, { loading }) => {
             if (loading) {
               return <CircularProgress />;
             }
@@ -165,12 +166,15 @@ class NewsletterForm extends Component {
 
 NewsletterForm.defaultProps = {
   newsletter: {},
+  error: null,
 };
 
 NewsletterForm.propTypes = {
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   newsletter: PropTypes.shape(),
+  classes: PropTypes.shape().isRequired,
+  error: PropTypes.shape(),
 };
 
 export default withStyles(styles)(NewsletterForm);

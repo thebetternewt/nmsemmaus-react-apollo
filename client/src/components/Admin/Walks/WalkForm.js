@@ -9,23 +9,25 @@ import {
   InputLabel,
   Input,
   TextField,
-  Button
+  Button,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   buttonMargins: {
-    margin: '1rem 20px 1rem 0'
-  }
+    margin: '1rem 20px 1rem 0',
+  },
 };
 
 class WalkForm extends Component {
   state = {
+    /* eslint-disable react/destructuring-assignment */
     id: this.props.walk.id || '',
     walkNumber: this.props.walk.walkNumber || '',
     gender: this.props.walk.gender || '',
     startDate: this.props.walk.startDate || '',
-    endDate: this.props.walk.endDate || ''
+    endDate: this.props.walk.endDate || '',
+    /* eslint-enable react/destructuring-assignment */
   };
 
   handleInputChange = e => {
@@ -46,9 +48,9 @@ class WalkForm extends Component {
               walkNumber,
               gender,
               startDate,
-              endDate
+              endDate,
             },
-            refetchQueries: ['WalksQuery']
+            refetchQueries: ['WalksQuery'],
           })
             .then(() => close())
             .catch(err => console.log(err));
@@ -57,8 +59,8 @@ class WalkForm extends Component {
         {error && (
           <pre style={{ margin: '1rem', color: 'red' }}>
             Error:{' '}
-            {error.graphQLErrors.map(({ message }, i) => (
-              <span key={i}>{message}</span>
+            {error.graphQLErrors.map(({ message }) => (
+              <span key={message}>{message}</span>
             ))}
           </pre>
         )}
@@ -97,7 +99,7 @@ class WalkForm extends Component {
             value={startDate}
             onChange={this.handleInputChange}
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
           />
         </FormControl>
@@ -110,7 +112,7 @@ class WalkForm extends Component {
             value={endDate}
             onChange={this.handleInputChange}
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
           />
         </FormControl>
@@ -137,13 +139,16 @@ class WalkForm extends Component {
 }
 
 WalkForm.defaultProps = {
-  walk: {}
+  walk: {},
+  error: null,
 };
 
 WalkForm.propTypes = {
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  walk: PropTypes.shape()
+  walk: PropTypes.shape(),
+  classes: PropTypes.shape().isRequired,
+  error: PropTypes.shape(),
 };
 
 export default withStyles(styles)(WalkForm);

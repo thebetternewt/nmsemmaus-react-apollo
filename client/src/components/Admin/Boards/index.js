@@ -35,7 +35,6 @@ class Boards extends Component {
   };
 
   render() {
-    console.log(this.state);
     const { showAddBoard, showBoard, selectedBoardYear } = this.state;
 
     return (

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { WALKS_QUERY } from '../../../apollo/queries';
 
 import {
   CircularProgress,
@@ -10,28 +9,42 @@ import {
   TableHead,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  TablePagination,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { WALKS_QUERY } from '../../../apollo/queries';
 
 const styles = {
   selected: {
-    backgroundColor: 'green'
-  }
+    backgroundColor: 'green',
+  },
 };
 
 class WalkList extends Component {
   state = {
-    selectedId: ''
+    selectedId: '',
+    page: 0,
+    rowsPerPage: 5,
   };
 
-  handleRowSelect = id => {
-    this.setState({ selectedId: id });
+  handleRowSelect = walk => {
+    const { selectWalk } = this.props;
+
+    this.setState({ selectedId: walk.id });
+    selectWalk(walk.walkNumber);
+  };
+
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
+
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
   };
 
   render() {
-    const { selectWalk } = this.props;
-    const { selectedId } = this.state;
+    const { selectedId, page, rowsPerPage } = this.state;
 
     return (
       <div>
@@ -58,28 +71,39 @@ class WalkList extends Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {walks.map(walk => {
-                        return (
-                          <TableRow
-                            hover
-                            key={walk.id}
-                            selected={walk.id === selectedId}
-                            onClick={() => {
-                              this.handleRowSelect(walk.id);
-                              selectWalk(walk);
-                            }}
-                          >
-                            <TableCell component="th" scope="row">
-                              {walk.walkNumber}
-                            </TableCell>
-                            <TableCell>{walk.gender}</TableCell>
-                            <TableCell>{walk.startDate}</TableCell>
-                            <TableCell>{walk.endDate}</TableCell>
-                          </TableRow>
-                        );
-                      })}
+                      {walks.map(walk => (
+                        <TableRow
+                          hover
+                          key={walk.id}
+                          selected={walk.id === selectedId}
+                          onClick={() => {
+                            this.handleRowSelect(walk);
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {walk.walkNumber}
+                          </TableCell>
+                          <TableCell>{walk.gender}</TableCell>
+                          <TableCell>{walk.startDate}</TableCell>
+                          <TableCell>{walk.endDate}</TableCell>
+                        </TableRow>
+                      ))}
                     </TableBody>
                   </Table>
+                  <TablePagination
+                    component="div"
+                    count={walks.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                      'aria-label': 'Previous Page',
+                    }}
+                    nextIconButtonProps={{
+                      'aria-label': 'Next Page',
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  />
                 </Paper>
               );
             }
@@ -93,7 +117,7 @@ class WalkList extends Component {
 }
 
 WalkList.propTypes = {
-  selectWalk: PropTypes.func.isRequired
+  selectWalk: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(WalkList);

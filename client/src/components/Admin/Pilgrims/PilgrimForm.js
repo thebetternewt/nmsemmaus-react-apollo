@@ -11,12 +11,14 @@ const styles = {
 
 class PilgrimForm extends Component {
   state = {
+    /* eslint-disable react/destructuring-assignment */
     id: this.props.pilgrim.id || '',
     firstName: this.props.pilgrim.firstName || '',
     lastName: this.props.pilgrim.lastName || '',
     hometown: this.props.pilgrim.hometown || '',
     sponsor: this.props.pilgrim.sponsor || '',
     walkNumber: this.props.pilgrim.walkNumber || this.props.walkNumber,
+    /* eslint-enable react/destructuring-assignment */
   };
 
   handleInputChange = e => {
@@ -33,9 +35,6 @@ class PilgrimForm extends Component {
       walkNumber,
     } = this.state;
     const { submit, close, error, classes } = this.props;
-
-    console.log('[Pilgrim]:', this.props.pilgrim);
-    console.log('[WalkNumber]:', walkNumber);
 
     return (
       <form
@@ -59,8 +58,8 @@ class PilgrimForm extends Component {
         {error && (
           <pre style={{ margin: '1rem', color: 'red' }}>
             Error:{' '}
-            {error.graphQLErrors.map(({ message }, i) => (
-              <span key={i}>{message}</span>
+            {error.graphQLErrors.map(({ message }) => (
+              <span key={message}>{message}</span>
             ))}
           </pre>
         )}
@@ -133,12 +132,17 @@ class PilgrimForm extends Component {
 
 PilgrimForm.defaultProps = {
   pilgrim: {},
+  walkNumber: null,
+  error: null,
 };
 
 PilgrimForm.propTypes = {
   submit: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   pilgrim: PropTypes.shape(),
+  walkNumber: PropTypes.number,
+  classes: PropTypes.shape().isRequired,
+  error: PropTypes.shape(),
 };
 
 export default withStyles(styles)(PilgrimForm);

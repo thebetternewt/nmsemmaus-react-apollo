@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Mutation, Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { Paper, CircularProgress, Button } from '@material-ui/core';
-import PilgrimForm from './PilgrimForm';
-import { PILGRIM_QUERY } from '../../../apollo/queries';
-import { UPDATE_PILGRIM } from '../../../apollo/mutations';
+import WalkForm from './WalkForm';
+import { WALK_QUERY } from '../../../apollo/queries';
+import { UPDATE_WALK } from '../../../apollo/mutations';
 
-export default class Pilgrim extends Component {
+export default class Walk extends Component {
   state = {
-    id: this.props.id, // eslint-disable-line react/destructuring-assignment
+    // walkNumber: this.props.walkNumber, // eslint-disable-line react/destructuring-assignment
     showEditMode: false,
   };
 
@@ -18,35 +18,35 @@ export default class Pilgrim extends Component {
   };
 
   render() {
-    const { id, showEditMode } = this.state;
-    const { cancelEdit } = this.props;
+    const { showEditMode } = this.state;
+    const { cancelEdit, walkNumber } = this.props;
 
     return (
       <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
-        <h3>Edit Pilgrim</h3>
-        <Query query={PILGRIM_QUERY} variables={{ id }}>
+        <h3>Edit Walk #{walkNumber}</h3>
+        <Query query={WALK_QUERY} variables={{ walkNumber }}>
           {({ data, loading }) => {
             if (loading) {
               return <CircularProgress />;
             }
 
-            if (data && data.pilgrim) {
-              const { firstName, lastName, hometown, sponsor } = data.pilgrim;
+            if (data && data.walk) {
+              const { startDate, endDate, gender } = data.walk;
 
               if (showEditMode) {
                 return (
-                  <Mutation mutation={UPDATE_PILGRIM}>
-                    {(updatePilgrim, { loading: updating, error }) => {
+                  <Mutation mutation={UPDATE_WALK}>
+                    {(updateWalk, { loading: updating, error }) => {
                       if (updating) {
                         return <CircularProgress />;
                       }
 
                       return (
-                        <PilgrimForm
-                          submit={updatePilgrim}
+                        <WalkForm
+                          submit={updateWalk}
                           error={error}
-                          close={this.toggleEditMode}
-                          pilgrim={data.pilgrim}
+                          walk={data.walk}
+                          close={cancelEdit}
                         />
                       );
                     }}
@@ -58,16 +58,16 @@ export default class Pilgrim extends Component {
                 <Fragment>
                   <h3>Detail:</h3>
                   <p>
-                    <strong>First Name:</strong> {firstName}
+                    <strong>Walk Number:</strong> {walkNumber}
                   </p>
                   <p>
-                    <strong>Last Name:</strong> {lastName}
+                    <strong>Start Date:</strong> {startDate}
                   </p>
                   <p>
-                    <strong>Hometown:</strong> {hometown}
+                    <strong>End Date:</strong> {endDate}
                   </p>
                   <p>
-                    <strong>Sponsor:</strong> {sponsor}
+                    <strong>Gender:</strong> {gender}
                   </p>
 
                   <Button
@@ -88,7 +88,7 @@ export default class Pilgrim extends Component {
               );
             }
 
-            return <p>Pilgrim not found.</p>;
+            return <p>Walk not found.</p>;
           }}
         </Query>
       </Paper>
@@ -96,7 +96,7 @@ export default class Pilgrim extends Component {
   }
 }
 
-Pilgrim.propTypes = {
-  id: PropTypes.string.isRequired,
+Walk.propTypes = {
+  walkNumber: PropTypes.number.isRequired,
   cancelEdit: PropTypes.func.isRequired,
 };

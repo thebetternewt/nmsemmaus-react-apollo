@@ -26,6 +26,7 @@ export default class Newsletter extends Component {
   };
 
   render() {
+    const { cancelEdit } = this.props;
     const { id, showEditMode, showDocumentUpload } = this.state;
 
     return (
@@ -66,7 +67,8 @@ export default class Newsletter extends Component {
                     <strong>Title:</strong> {title}
                   </p>
                   <p>
-                    <strong>Body:</strong> (click "Edit" to see body content)
+                    <strong>Body:</strong> (click &ldquo;Edit&rdquo; to see body
+                    content)
                   </p>
                   <p>
                     <strong>Publication Date:</strong> {publishedOn}
@@ -113,7 +115,7 @@ export default class Newsletter extends Component {
                       <Button
                         variant="raised"
                         color="secondary"
-                        onClick={this.props.cancelEdit}
+                        onClick={cancelEdit}
                       >
                         Close
                       </Button>
@@ -133,4 +135,5 @@ export default class Newsletter extends Component {
 
 Newsletter.propTypes = {
   id: PropTypes.string.isRequired,
+  cancelEdit: PropTypes.func.isRequired,
 };

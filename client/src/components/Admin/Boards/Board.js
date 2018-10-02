@@ -26,7 +26,6 @@ export default class EditBoard extends Component {
       <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
         <Query query={BOARD_QUERY} variables={{ year }}>
           {({ data, loading }) => {
-            console.log('data:', data);
             if (loading) {
               return <CircularProgress />;
             }

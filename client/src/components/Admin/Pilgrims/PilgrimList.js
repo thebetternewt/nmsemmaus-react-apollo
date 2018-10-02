@@ -61,7 +61,7 @@ class PilgrimList extends Component {
               const {
                 walk: { pilgrims },
               } = data;
-              console.log(pilgrims);
+
               return (
                 <Paper elevation={12} style={{ margin: '2rem 0', padding: 15 }}>
                   {pilgrims.length > 0 ? (

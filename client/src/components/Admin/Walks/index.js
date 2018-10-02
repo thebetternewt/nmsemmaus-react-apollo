@@ -3,59 +3,58 @@ import { Button } from '@material-ui/core';
 
 import WalkList from './WalkList';
 import AddWalk from './AddWalk';
-import EditWalk from './EditWalk';
+import Walk from './Walk';
 import Pilgrims from '../Pilgrims';
 
 export default class Walks extends Component {
   state = {
     showAddWalk: false,
-    showEditWalk: false,
-    selectedWalk: null
+    showWalk: false,
+    selectedWalkNumber: null,
   };
 
   showAddWalk = () => {
-    this.setState({ showAddWalk: true, showEditWalk: false });
+    this.setState({ showAddWalk: true, showWalk: false });
   };
+
   hideAddWalk = () => {
     this.setState({ showAddWalk: false });
   };
 
-  showEditWalk = walk => {
+  showWalk = walkNumber => {
     this.setState({
-      selectedWalk: walk,
-      showEditWalk: true,
-      showAddWalk: false
+      selectedWalkNumber: walkNumber,
+      showWalk: true,
+      showAddWalk: false,
     });
   };
 
-  hideEditWalk = walk => {
+  hideWalk = () => {
     this.setState({
-      showEditWalk: false
+      showWalk: false,
     });
   };
 
   render() {
-    const { showAddWalk, showEditWalk, selectedWalk } = this.state;
+    const { showAddWalk, showWalk, selectedWalkNumber } = this.state;
 
     return (
       <div>
         <h2>Manage Walks</h2>
 
-        {showEditWalk && (
+        {showWalk && (
           <Fragment>
-            <EditWalk walk={selectedWalk} cancelEdit={this.hideEditWalk} />
-            <Pilgrims walkNumber={selectedWalk.walkNumber} />
+            <Walk walkNumber={selectedWalkNumber} cancelEdit={this.hideWalk} />
+            <Pilgrims walkNumber={selectedWalkNumber} />
           </Fragment>
         )}
-        {!showAddWalk &&
-          !showEditWalk && <WalkList selectWalk={this.showEditWalk} />}
+        {!showAddWalk && !showWalk && <WalkList selectWalk={this.showWalk} />}
         {showAddWalk && <AddWalk cancelAdd={this.hideAddWalk} />}
-        {!showAddWalk &&
-          !showEditWalk && (
-            <Button variant="raised" color="primary" onClick={this.showAddWalk}>
-              Add New Walk
-            </Button>
-          )}
+        {!(showAddWalk || showWalk) && (
+          <Button variant="raised" color="primary" onClick={this.showAddWalk}>
+            Add New Walk
+          </Button>
+        )}
       </div>
     );
   }

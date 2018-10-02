@@ -44,7 +44,9 @@ const PILGRIM_QUERY = gql`
 const WALK_QUERY = gql`
   query WalkQuery($walkNumber: Int!) {
     walk(walkNumber: $walkNumber) {
+      id
       walkNumber
+      gender
       startDate
       endDate
       pilgrims {

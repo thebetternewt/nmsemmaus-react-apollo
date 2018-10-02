@@ -1,33 +1,31 @@
-import React, { Component } from 'react';
-import WalkForm from './WalkForm';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Mutation } from 'react-apollo';
+import { Paper, CircularProgress } from '@material-ui/core';
+import WalkForm from './WalkForm';
 import { ADD_WALK } from '../../../apollo/mutations';
 
-import { Paper, CircularProgress } from '@material-ui/core';
+const AddWalk = props => {
+  const { cancelAdd } = props;
 
-export default class AddWalk extends Component {
-  render() {
-    const { cancelAdd } = this.props;
+  return (
+    <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
+      <h3>Add Walk</h3>
+      <Mutation mutation={ADD_WALK}>
+        {(addWalk, { loading, error }) => {
+          if (loading) {
+            return <CircularProgress />;
+          }
 
-    return (
-      <Paper elevation={12} style={{ padding: '1rem', margin: '2rem 0' }}>
-        <h3>Add Walk</h3>
-        <Mutation mutation={ADD_WALK}>
-          {(addWalk, { data, loading, error }) => {
-            if (loading) {
-              return <CircularProgress />;
-            }
+          return <WalkForm submit={addWalk} error={error} close={cancelAdd} />;
+        }}
+      </Mutation>
+    </Paper>
+  );
+};
 
-            if (data) {
-              console.log(data);
-            }
+AddWalk.propTypes = {
+  cancelAdd: PropTypes.func.isRequired,
+};
 
-            return (
-              <WalkForm submit={addWalk} error={error} close={cancelAdd} />
-            );
-          }}
-        </Mutation>
-      </Paper>
-    );
-  }
-}
+export default AddWalk;
