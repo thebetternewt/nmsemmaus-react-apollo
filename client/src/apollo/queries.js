@@ -1,11 +1,5 @@
 import gql from 'graphql-tag';
 
-const LOGIN_MUTATION = gql`
-  mutation Login($username: String!, $password: String!) {
-    login(username: $username, password: $password)
-  }
-`;
-
 const CURRENT_USER_QUERY = gql`
   query CurrentUserQuery {
     me {
@@ -172,7 +166,6 @@ const BOARDS_QUERY = gql`
 `;
 
 export {
-  LOGIN_MUTATION,
   AUTH_QUERY,
   REDIRECT_QUERY,
   CURRENT_USER_QUERY,

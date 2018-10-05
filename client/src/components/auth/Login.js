@@ -3,16 +3,9 @@ import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 import { Mutation } from 'react-apollo';
-import { LOGIN_MUTATION } from '../../apollo/queries';
-import {
-  setAuthenticatedUser,
-  getRedirectPath,
-  setRedirectPath
-} from '../../apollo/client';
-
 import {
   Typography,
   Paper,
@@ -22,13 +15,20 @@ import {
   Button,
   CssBaseline,
   Avatar,
-  CircularProgress
+  CircularProgress,
 } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/LockOutlined';
+import { withStyles } from '@material-ui/core/styles';
+import { LOGIN } from '../../apollo/mutations';
+import {
+  setAuthenticatedUser,
+  getRedirectPath,
+  setRedirectPath,
+} from '../../apollo/client';
+
 import { DarkFilter } from '../UI/filters';
 
 import boardPath from '../../images/board-path.jpeg';
-import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   layout: {
@@ -40,8 +40,8 @@ const styles = theme => ({
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 400,
       marginLeft: 'auto',
-      marginRight: 'auto'
-    }
+      marginRight: 'auto',
+    },
   },
   paper: {
     marginTop: theme.spacing.unit * 8,
@@ -49,25 +49,25 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`
+      .spacing.unit * 3}px`,
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE11 issue.
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
   },
   submit: {
-    marginTop: theme.spacing.unit * 3
-  }
+    marginTop: theme.spacing.unit * 3,
+  },
 });
 
 class Login extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
   };
 
   // Handle input value changes
@@ -95,7 +95,7 @@ class Login extends Component {
               <LockIcon />
             </Avatar>
             <Typography variant="headline">Sign in</Typography>
-            <Mutation mutation={LOGIN_MUTATION}>
+            <Mutation mutation={LOGIN}>
               {(login, { loading, data, error }) => {
                 if (loading) {
                   return (
@@ -109,22 +109,21 @@ class Login extends Component {
                 if (data) {
                   const token = data.login;
                   localStorage.setItem('token', token);
-                  setAuthenticatedUser(jwt_decode(token));
+                  setAuthenticatedUser(jwtDecode(token));
                   const path = getRedirectPath();
                   if (path) {
                     setRedirectPath(null);
                     return <Redirect to={path} />;
-                  } else {
-                    return <Redirect to="/" />;
                   }
+                  return <Redirect to="/" />;
                 }
                 return (
                   <Fragment>
                     {error && (
                       <pre style={{ color: 'red' }}>
                         Error:{' '}
-                        {error.graphQLErrors.map(({ message }, i) => (
-                          <span key={i}>{message}</span>
+                        {error.graphQLErrors.map(({ message }) => (
+                          <span key={message}>{message}</span>
                         ))}
                       </pre>
                     )}
@@ -135,8 +134,8 @@ class Login extends Component {
                         login({
                           variables: {
                             username,
-                            password
-                          }
+                            password,
+                          },
                         }).catch(err => console.log(err.message));
                       }}
                     >
@@ -179,12 +178,8 @@ class Login extends Component {
   }
 }
 
-Login.defaultProps = {
-  redirectPath: null
-};
-
 Login.propTypes = {
-  redirectPath: PropTypes.string
+  classes: PropTypes.shape().isRequired,
 };
 
 export default withStyles(styles)(Login);

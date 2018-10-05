@@ -1,13 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import './App.css';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
-
-import { setAuthenticatedUser, logOutUser } from './apollo/client';
-
 import PrivateRoute from './components/common/PrivateRoute';
 import Layout from './components/layout/Layout';
 import HomePage from './components/HomePage';
@@ -19,23 +15,6 @@ import Boards from './components/Boards';
 import Sponsorship from './components/Sponsorship';
 import Admin from './components/Admin';
 import theme from './components/common/MuiTheme';
-
-// Check for token in LS
-const token = localStorage.getItem('token');
-if (token) {
-  const decoded = jwtDecode(token);
-  // Set user data in Apollo cache
-  setAuthenticatedUser(decoded);
-
-  // Check for expired token
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    // Logout user
-    logOutUser();
-    // Redirect to login
-    window.location.href = '/';
-  }
-}
 
 const App = () => (
   <MuiThemeProvider theme={theme}>

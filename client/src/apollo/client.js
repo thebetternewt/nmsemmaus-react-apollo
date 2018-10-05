@@ -29,9 +29,6 @@ const setAuthenticatedUser = userData => {
       user: { __typename: 'user', ...userData },
     },
   });
-
-  // const { user } = client.cache.readQuery({ query: CURRENT_USER_QUERY });
-  // console.log('user from cache:', user);
 };
 
 const isAuthenticated = () => {

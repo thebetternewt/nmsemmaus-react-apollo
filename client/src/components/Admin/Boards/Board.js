@@ -7,7 +7,7 @@ import { UPDATE_BOARD } from '../../../apollo/mutations';
 
 import BoardForm from './BoardForm';
 
-export default class EditBoard extends Component {
+export default class Board extends Component {
   state = {
     year: this.props.year, // eslint-disable-line react/destructuring-assignment
     showEditMode: false,
@@ -115,7 +115,7 @@ export default class EditBoard extends Component {
   }
 }
 
-EditBoard.propTypes = {
+Board.propTypes = {
   year: PropTypes.string.isRequired,
   cancelEdit: PropTypes.func.isRequired,
 };

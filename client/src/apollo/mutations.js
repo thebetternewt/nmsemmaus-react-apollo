@@ -1,5 +1,11 @@
 import gql from 'graphql-tag';
 
+const LOGIN = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password)
+  }
+`;
+
 const ADD_WALK = gql`
   mutation AddWalk(
     $walkNumber: Int!
@@ -214,6 +220,7 @@ const REMOVE_BOARD = gql`
 `;
 
 export {
+  LOGIN,
   ADD_WALK,
   UPDATE_WALK,
   ADD_PILGRIM,
