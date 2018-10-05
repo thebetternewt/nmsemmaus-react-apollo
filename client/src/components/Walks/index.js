@@ -18,6 +18,7 @@ import { WALKS_QUERY } from '../../apollo/queries';
 import Hero from '../common/Hero';
 import candles from '../../images/candles.jpeg';
 import boardPath from '../../images/board-path.jpeg';
+import { isEmptyObject } from '../../util/isEmpty';
 
 const Walks = () => (
   <Fragment>
@@ -30,7 +31,7 @@ const Walks = () => (
       fetchPolicy="cache-and-network"
     >
       {({ data, loading, fetchMore }) => {
-        if (loading) {
+        if (loading && isEmptyObject(data)) {
           return (
             <Grid item>
               <CircularProgress size={50} />;
@@ -109,7 +110,7 @@ const Walks = () => (
                 <Button
                   variant="raised"
                   color="primary"
-                  onClick={() =>
+                  onClick={() => {
                     fetchMore({
                       variables: {
                         offset: walks.length,
@@ -120,8 +121,8 @@ const Walks = () => (
                           walks: [...prev.walks, ...fetchMoreResult.walks],
                         });
                       },
-                    })
-                  }
+                    });
+                  }}
                 >
                   Load More
                 </Button>
