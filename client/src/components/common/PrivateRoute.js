@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthenticated, setRedirectPath } from '../../apollo/client';
 import PropTypes from 'prop-types';
+import { isAuthenticated, setRedirectPath } from '../../apollo/client';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -18,13 +18,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-PrivateRoute.defaultProps = {
-  isAuthenticated: false
-};
-
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default PrivateRoute;

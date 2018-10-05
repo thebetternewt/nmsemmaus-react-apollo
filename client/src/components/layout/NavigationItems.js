@@ -2,44 +2,43 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { Button } from '@material-ui/core';
 import { isAuthenticated, logOutUser } from '../../apollo/client';
 
 import NavigationItem from './NavigationItem';
-import { Button } from '@material-ui/core';
 
-const NavigationItems = props => {
-  return (
-    <Nav>
-      <NavigationItem link="/">Home</NavigationItem>
-      {isAuthenticated() ? (
-        <Fragment>
-          <NavigationItem link="/news">News</NavigationItem>
-          <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
-          <NavigationItem link="/">Applications</NavigationItem>
-          <NavigationItem link="/sponsorship">Sponsorship</NavigationItem>
-          <NavigationItem link="/admin/walks">Admin</NavigationItem>
-          <LoginButton
-            color="secondary"
-            size="large"
-            variant="raised"
-            onClick={() => {
-              logOutUser();
-              window.location.href = '/';
-            }}
-          >
-            Logout
-          </LoginButton>
-        </Fragment>
-      ) : (
-        <Link to="/login">
-          <LoginButton color="secondary" size="large" variant="raised">
-            Login
-          </LoginButton>
-        </Link>
-      )}
-    </Nav>
-  );
-};
+const NavigationItems = () => (
+  <Nav>
+    <NavigationItem link="/">Home</NavigationItem>
+    {isAuthenticated() ? (
+      <Fragment>
+        <NavigationItem link="/news">News</NavigationItem>
+        <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
+        <NavigationItem link="/board">Board</NavigationItem>
+        <NavigationItem link="/">Applications</NavigationItem>
+        <NavigationItem link="/sponsorship">Sponsorship</NavigationItem>
+        <NavigationItem link="/admin/walks">Admin</NavigationItem>
+        <LoginButton
+          color="secondary"
+          size="large"
+          variant="raised"
+          onClick={() => {
+            logOutUser();
+            window.location.href = '/';
+          }}
+        >
+          Logout
+        </LoginButton>
+      </Fragment>
+    ) : (
+      <Link to="/login">
+        <LoginButton color="secondary" size="large" variant="raised">
+          Login
+        </LoginButton>
+      </Link>
+    )}
+  </Nav>
+);
 
 export default NavigationItems;
 

@@ -15,6 +15,7 @@ import News from './components/News';
 import Login from './components/auth/Login';
 import Walks from './components/Walks';
 import Walk from './components/Walks/Walk';
+import Boards from './components/Boards';
 import Sponsorship from './components/Sponsorship';
 import Admin from './components/Admin';
 import theme from './components/common/MuiTheme';
@@ -58,6 +59,9 @@ const App = () => (
         </Switch>
         <Switch>
           <PrivateRoute exact path="/pilgrim-lists" component={Walks} />
+        </Switch>
+        <Switch>
+          <PrivateRoute exact path="/Board" component={Boards} />
         </Switch>
         <Switch>
           <PrivateRoute

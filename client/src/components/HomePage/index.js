@@ -2,17 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Button, Paper, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { isAuthenticated } from '../../apollo/client';
 
 import Section from '../common/Section';
 import Hero from '../common/Hero';
 import Separator from '../UI/Separator';
 import { RED, GREEN, BLUE } from '../UI/colors';
-import UpcomingWalks from './UpcomingWalks';
-import LinksCard from './LinksCard';
 
 import woodedPath from '../../images/board-path.jpeg';
+import SideBar from './SideBar';
 
 const HomePage = styled.div`
   background-color: #fff;
@@ -34,6 +33,10 @@ const HomePage = styled.div`
     font-weight: 500;
     margin: 1em 0 0.5em;
     text-align: center;
+
+    nobr {
+      font-family: inherit;
+    }
   }
   h3 {
     color: ${BLUE};
@@ -57,9 +60,8 @@ const HomePage = styled.div`
     text-align: center;
 
     small {
-      font-family: 'Raleway', 'Helvetica Neue', Arial, sans-serif;
       font-weight: 300;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       opacity: 0.5;
     }
   }
@@ -75,9 +77,7 @@ const HomePage = styled.div`
   }
 
   p {
-    font-family: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 1.05rem;
-    letter-spacing: 0.03em;
 
     span {
       font-weight: 300;
@@ -105,23 +105,9 @@ export default () => (
         container
         justify="center"
         spacing={32}
-        style={{ maxWidth: '960px', margin: '0 auto' }}
+        style={{ width: '960px', maxWidth: '95vw', margin: '0 auto' }}
       >
         <Grid item md={8}>
-          {isAuthenticated() && (
-            <Paper
-              style={{
-                backgroundColor: 'lightgreen',
-                color: '#333',
-                padding: '15px',
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              Welcome to the North MS Emmaus Community!
-            </Paper>
-          )}
           <h2>
             The vision of the Walk To Emmaus is <nobr>three-fold:</nobr>
           </h2>
@@ -167,8 +153,7 @@ export default () => (
           </p>
         </Grid>
         <Grid item md={4}>
-          <UpcomingWalks />
-          <LinksCard />
+          <SideBar />
         </Grid>
       </Grid>
     </Section>

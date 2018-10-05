@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Container from './ContentContainer';
 import { Paper } from '@material-ui/core';
+import Container from './ContentContainer';
 import { DarkFilter } from '../UI/filters';
 
 const PaperHero = styled(Paper)`
@@ -14,10 +14,10 @@ const PaperHero = styled(Paper)`
   font-size: 1rem;
   height: ${({ size }) => {
     switch (size) {
-      case 'sm':
-        return '35vh';
-      default:
-        return '70vh';
+    case 'sm':
+      return '35vh';
+    default:
+      return '70vh';
     }
   }};
   justify-content: center;
@@ -52,18 +52,19 @@ const Hero = props => {
       size={size}
     >
       <DarkFilter />
-
       <Container>{props.children}</Container>
     </PaperHero>
   );
 };
 
 Hero.defaultProps = {
-  size: 'lg'
+  size: 'lg',
+  backgroundImage: '',
 };
 
 Hero.propTypes = {
-  size: PropTypes.string
+  size: PropTypes.string,
+  backgroundImage: PropTypes.string,
 };
 
 export default Hero;
