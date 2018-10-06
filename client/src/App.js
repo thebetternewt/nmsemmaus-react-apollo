@@ -15,6 +15,7 @@ import Boards from './components/Boards';
 import Sponsorship from './components/Sponsorship';
 import Admin from './components/Admin';
 import theme from './components/common/MuiTheme';
+import Applications from './components/Applications/index';
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
@@ -40,7 +41,10 @@ const App = () => (
           <PrivateRoute exact path="/pilgrim-lists" component={Walks} />
         </Switch>
         <Switch>
-          <PrivateRoute exact path="/Board" component={Boards} />
+          <PrivateRoute exact path="/board" component={Boards} />
+        </Switch>
+        <Switch>
+          <PrivateRoute exact path="/applications" component={Applications} />
         </Switch>
         <Switch>
           <PrivateRoute

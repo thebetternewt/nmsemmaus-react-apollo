@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
@@ -13,9 +13,6 @@ import {
   CardActions,
   Button,
   TextField,
-  FormControl,
-  InputLabel,
-  Input,
 } from '@material-ui/core';
 import { WALKS_QUERY } from '../../apollo/queries';
 
@@ -37,7 +34,7 @@ class Walks extends Component {
     const { walkNumberSearch } = this.state;
 
     return (
-      <Fragment>
+      <div>
         <Hero backgroundImage={candles} size="sm">
           <h1>Pilgrim Lists</h1>
         </Hero>
@@ -180,7 +177,7 @@ class Walks extends Component {
             return <p>No walks found.</p>;
           }}
         </Query>
-      </Fragment>
+      </div>
     );
   }
 }

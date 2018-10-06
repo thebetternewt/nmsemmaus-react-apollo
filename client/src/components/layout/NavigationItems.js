@@ -15,7 +15,7 @@ const NavigationItems = () => (
         <NavigationItem link="/news">News</NavigationItem>
         <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
         <NavigationItem link="/board">Board</NavigationItem>
-        <NavigationItem link="/">Applications</NavigationItem>
+        <NavigationItem link="/applications">Applications</NavigationItem>
         <NavigationItem link="/sponsorship">Sponsorship</NavigationItem>
         <NavigationItem link="/admin/walks">Admin</NavigationItem>
         <LoginButton
@@ -31,12 +31,12 @@ const NavigationItems = () => (
         </LoginButton>
       </Fragment>
     ) : (
-        <Link to="/login" style={{ width: '100%', padding: '0 30px' }}>
-          <LoginButton color="secondary" size="large" variant="raised" fullWidth>
-            Login
+      <Link to="/login" style={{ width: '100%', padding: '0 30px' }}>
+        <LoginButton color="secondary" size="large" variant="raised" fullWidth>
+          Login
         </LoginButton>
-        </Link>
-      )}
+      </Link>
+    )}
   </Nav>
 );
 
