@@ -8,6 +8,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NavigationItems from './NavigationItems';
 
 const MenuBar = styled(AppBar)`
+  padding: 0 5px;
+
   nav {
     display: none;
   }
@@ -26,10 +28,13 @@ const MenuBar = styled(AppBar)`
 
 const BrandLink = styled(Link)`
   flex-grow: 1;
+  justify-content: flex-start;
 `;
+
 const Brand = styled(Typography)`
   flex-grow: 1;
   text-transform: uppercase;
+  text-align: left;
 
   span {
     font-size: 16px;

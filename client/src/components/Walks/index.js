@@ -42,31 +42,12 @@ class Walks extends Component {
           <h1>Pilgrim Lists</h1>
         </Hero>
 
-        <TextField
-          variant="outlined"
-          id="walkNumberSearch"
-          name="walkNumberSearch"
-          label="Search for a Walk"
-          value={walkNumberSearch}
-          onChange={this.handleInputChange}
-          // placeholder="Walk Number"
-          style={{ maxWidth: 300, margin: '2rem auto' }}
-        />
-        <Button
-          variant="raised"
-          color="primary"
-          style={{ maxWidth: 300, margin: '0 auto' }}
-          // TODO: Fire query on click
-        >
-          Search
-        </Button>
-
         <Query
           query={WALKS_QUERY}
-          variables={{ offset: 0, limit: 3, walknumber: walkNumberSearch }}
+          variables={{ offset: 0, limit: 3 }}
           fetchPolicy="cache-and-network"
         >
-          {({ data, loading, fetchMore }) => {
+          {({ data, loading, fetchMore, refetch }) => {
             if (loading && isEmptyObject(data)) {
               return (
                 <Grid item>
@@ -137,6 +118,32 @@ class Walks extends Component {
                     maxWidth: '95%',
                   }}
                 >
+                  <TextField
+                    type="number"
+                    variant="outlined"
+                    id="walkNumberSearch"
+                    name="walkNumberSearch"
+                    label="Search for a Walk"
+                    placeholder="Walk #"
+                    value={walkNumberSearch}
+                    onChange={this.handleInputChange}
+                    style={{ maxWidth: 300, margin: '0 auto 1rem' }}
+                  />
+                  <Button
+                    variant="raised"
+                    color="primary"
+                    style={{ maxWidth: 300, margin: '0 auto 2rem' }}
+                    disabled={!walkNumberSearch.length}
+                    onClick={() =>
+                      refetch({
+                        offset: 0,
+                        limit: 3,
+                        walkNumber: walkNumberSearch,
+                      })
+                    }
+                  >
+                    Search
+                  </Button>
                   <Grid
                     container
                     spacing={16}

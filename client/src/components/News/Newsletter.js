@@ -6,20 +6,24 @@ import { Paper, Button } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 
 const Newsletter = props => {
-  const { title, body, documentUrl } = props.newsletter;
+  const {
+    newsletter: { title, body, documentUrl },
+  } = props;
 
   return (
     <div>
-      <NewsletterPaper elevation={22} square color="primary">
+      <NewsletterPaper elevation={22} color="primary">
         <h2>{title}.</h2>
+        {/* eslint-disable react/no-danger */}
         <div
           dangerouslySetInnerHTML={{
-            __html: body
+            __html: body,
           }}
         />
+        {/* eslint-enable react/no-danger */}
       </NewsletterPaper>
       {documentUrl && (
-        <a href={documentUrl} target="_blank">
+        <a href={documentUrl} target="_blank" rel="noopener noreferrer">
           <Button
             variant="raised"
             color="primary"
@@ -34,7 +38,7 @@ const Newsletter = props => {
 };
 
 Newsletter.propTypes = {
-  newsletter: PropTypes.shape().isRequired
+  newsletter: PropTypes.shape().isRequired,
 };
 
 export default Newsletter;
@@ -44,6 +48,7 @@ const NewsletterPaper = styled(Paper)`
   max-width: 95vw;
 
   h2 {
+    text-align: left;
     font-size: 2rem;
     margin-bottom: 1.5em;
   }

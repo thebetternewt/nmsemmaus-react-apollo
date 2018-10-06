@@ -31,12 +31,12 @@ const NavigationItems = () => (
         </LoginButton>
       </Fragment>
     ) : (
-      <Link to="/login">
-        <LoginButton color="secondary" size="large" variant="raised">
-          Login
+        <Link to="/login" style={{ width: '100%', padding: '0 30px' }}>
+          <LoginButton color="secondary" size="large" variant="raised" fullWidth>
+            Login
         </LoginButton>
-      </Link>
-    )}
+        </Link>
+      )}
   </Nav>
 );
 

@@ -43,7 +43,7 @@ const PilgrimListPdf = props => {
       <Button
         variant="raised"
         color="primary"
-        style={{ marginTop: '2rem' }}
+        style={{ marginTop: '2rem', width: '100%' }}
         onClick={() => pdfMake.createPdf(docDefinition).open()}
       >
         Download <CloudDownloadIcon style={{ marginLeft: '10px' }} />

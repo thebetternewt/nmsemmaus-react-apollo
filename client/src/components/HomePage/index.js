@@ -18,20 +18,7 @@ const HomePage = styled.div`
   margin: 0 0 2rem 0;
   font-size: 1.3rem;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-    letter-spacing: normal;
-  }
-
   h2 {
-    font-size: 2.2rem;
-    font-weight: 500;
-    margin: 1em 0 0.5em;
     text-align: center;
 
     nobr {
@@ -40,9 +27,6 @@ const HomePage = styled.div`
   }
   h3 {
     color: ${BLUE};
-    /* font-size: 1.8rem; */
-    font-weight: 500;
-    margin: 1em 0 0.5em;
     text-align: left;
     align-self: flex-start;
 
@@ -55,10 +39,6 @@ const HomePage = styled.div`
   }
 
   h4 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-align: center;
-
     small {
       font-weight: 300;
       font-size: 1.3rem;
@@ -66,19 +46,7 @@ const HomePage = styled.div`
     }
   }
 
-  h5 {
-    opacity: 0.6;
-    font-size: 1.1rem;
-    font-weight: 300;
-    font-style: italic;
-    margin: 1em 0;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
   p {
-    font-size: 1.05rem;
-
     span {
       font-weight: 300;
       opacity: 0.7;

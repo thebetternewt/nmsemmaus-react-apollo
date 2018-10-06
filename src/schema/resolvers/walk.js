@@ -17,7 +17,11 @@ module.exports = {
       }
       return Walk.findOne({ walkNumber }).exec();
     },
-    walks: async (parent, { offset, limit, afterDate }, { user }) => {
+    walks: async (
+      parent,
+      { offset, limit, afterDate, walkNumber },
+      { user }
+    ) => {
       if (!user) {
         throw new Error('Not authorized');
       }
@@ -25,6 +29,10 @@ module.exports = {
       const searchParams = {};
       if (afterDate) {
         searchParams.startDate = { $gte: afterDate };
+      }
+
+      if (walkNumber) {
+        searchParams.walkNumber = walkNumber;
       }
 
       return Walk.where({ ...searchParams })

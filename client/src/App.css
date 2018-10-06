@@ -1,28 +1,41 @@
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: normal;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin: 1em 0 0.5em;
+  text-align: center;
 }
 
-.App-title {
-  font-size: 1.5em;
+h3 {
+  font-weight: 500;
+  margin: 1em 0 0.5em;
 }
 
-.App-intro {
-  font-size: large;
+h4 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h5 {
+  opacity: 0.6;
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  margin: 1em 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.05rem;
 }
