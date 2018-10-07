@@ -5,13 +5,9 @@ import { Query } from 'react-apollo';
 import {
   Grid,
   Card,
-  CardActionArea,
-  CardMedia,
   CardContent,
   CircularProgress,
   Typography,
-  CardActions,
-  Button,
 } from '@material-ui/core';
 import { BOARDS_QUERY } from '../../apollo/queries';
 import { PURPLE } from '../UI/colors';
@@ -37,7 +33,7 @@ const Boards = () => (
           if (loading) {
             return (
               <Grid item>
-                <CircularProgress size={50} />;
+                <CircularProgress />
               </Grid>
             );
           }

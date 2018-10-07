@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { Grid, Button } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
@@ -14,7 +13,7 @@ import Separator from '../UI/Separator';
 const Applications = () => (
   <div>
     <Hero backgroundImage={boardPath} size="sm">
-      <h1>Applications</h1>
+      <h1>Application Forms</h1>
     </Hero>
     <Grid
       container
@@ -42,15 +41,21 @@ const Applications = () => (
           justify="space-around"
           style={{ paddingTop: '10px', maxWidth: 400 }}
         >
-          <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
-            Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
-          </Button>
-          <Button
+          <a
+            href="https://s3.amazonaws.com/nmsemmaus/applications/Team+Application_2018.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
+              Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
+          {/* <Button
             variant="raised"
             style={{ backgroundColor: YELLOW, marginTop: 10 }}
           >
             Online Form <CreateIcon style={{ marginLeft: 10 }} />
-          </Button>
+          </Button> */}
         </Grid>
       </Application>
       {/* CLERGY APPLICATION */}
@@ -72,15 +77,21 @@ const Applications = () => (
           justify="space-around"
           style={{ paddingTop: '10px', maxWidth: 400 }}
         >
-          <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
-            Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
-          </Button>
-          <Button
+          <a
+            href="https://s3.amazonaws.com/nmsemmaus/applications/2018+Clergy+Application.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
+              Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
+          {/* <Button
             variant="raised"
             style={{ backgroundColor: YELLOW, marginTop: 10 }}
           >
             Online Form <CreateIcon style={{ marginLeft: 10 }} />
-          </Button>
+          </Button> */}
         </Grid>
       </Application>
       {/* INFORMATION UPDATE */}
@@ -94,7 +105,7 @@ const Applications = () => (
         lg={6}
         style={{ maxWidth: '400px' }}
       >
-        <h3>Information Update</h3>
+        <h3>Information Update Form</h3>
         <Separator margin="1rem" />
         <Grid
           item
@@ -102,15 +113,27 @@ const Applications = () => (
           justify="space-around"
           style={{ paddingTop: '10px', maxWidth: 400 }}
         >
-          <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
-            Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
-          </Button>
-          <Button
-            variant="raised"
-            style={{ backgroundColor: YELLOW, marginTop: 10 }}
+          <a
+            href="https://s3.amazonaws.com/nmsemmaus/applications/Personal+Information+Update_Oct_2009.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Online Form <CreateIcon style={{ marginLeft: 10 }} />
-          </Button>
+            <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
+              Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
+          <a
+            href="https://goo.gl/forms/ynyfjMHEqZ2G3CpV2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              variant="raised"
+              style={{ backgroundColor: YELLOW, marginTop: 10 }}
+            >
+              Online Form <CreateIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
         </Grid>
       </Application>
       {/* PILGRIM APPLICATION */}
@@ -132,18 +155,24 @@ const Applications = () => (
           justify="space-around"
           style={{ paddingTop: '10px', maxWidth: 400 }}
         >
-          <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
-            Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
-          </Button>
-          <Button
+          <a
+            href="https://s3.amazonaws.com/nmsemmaus/applications/Request+for+Reservation_2018.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
+              Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
+          {/* <Button
             variant="raised"
             style={{ backgroundColor: YELLOW, marginTop: 10 }}
           >
             Online Form <CreateIcon style={{ marginLeft: 10 }} />
-          </Button>
+          </Button> */}
         </Grid>
       </Application>
-      {/* MUISC APPLICATION */}
+      {/* MUSIC APPLICATION */}
       <Application
         container
         item
@@ -154,7 +183,7 @@ const Applications = () => (
         lg={6}
         style={{ maxWidth: '400px' }}
       >
-        <h3>Music Application</h3>
+        <h3>Music Team Application</h3>
         <Separator margin="1rem" />
         <Grid
           item
@@ -162,15 +191,21 @@ const Applications = () => (
           justify="space-around"
           style={{ paddingTop: '10px', maxWidth: 400 }}
         >
-          <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
-            Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
-          </Button>
-          <Button
+          <a
+            href="https://s3.amazonaws.com/nmsemmaus/applications/Music+Team+Application_2018.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
+              Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
+          {/* <Button
             variant="raised"
             style={{ backgroundColor: YELLOW, marginTop: 10 }}
           >
             Online Form <CreateIcon style={{ marginLeft: 10 }} />
-          </Button>
+          </Button> */}
         </Grid>
       </Application>
       {/* SPONSOR APPLICATION */}
@@ -184,7 +219,7 @@ const Applications = () => (
         lg={6}
         style={{ maxWidth: '400px' }}
       >
-        <h3>Sponsor Application</h3>
+        <h3>Sponsorship Application</h3>
         <Separator margin="1rem" />
         <Grid
           item
@@ -192,15 +227,21 @@ const Applications = () => (
           justify="space-around"
           style={{ paddingTop: '10px', maxWidth: 400 }}
         >
-          <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
-            Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
-          </Button>
-          <Button
+          <a
+            href="https://s3.amazonaws.com/nmsemmaus/applications/Sponsor_Sheet_2012.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="raised" color="primary" style={{ marginTop: 10 }}>
+              Download <CloudDownloadIcon style={{ marginLeft: 10 }} />
+            </Button>
+          </a>
+          {/* <Button
             variant="raised"
             style={{ backgroundColor: YELLOW, marginTop: 10 }}
           >
             Online Form <CreateIcon style={{ marginLeft: 10 }} />
-          </Button>
+          </Button> */}
         </Grid>
       </Application>
     </Grid>

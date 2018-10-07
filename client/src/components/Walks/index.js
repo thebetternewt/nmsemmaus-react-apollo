@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
@@ -24,6 +24,7 @@ import { isEmptyObject } from '../../util/isEmpty';
 class Walks extends Component {
   state = {
     walkNumberSearch: '',
+    endOfWalks: false,
   };
 
   handleInputChange = e => {
@@ -31,7 +32,7 @@ class Walks extends Component {
   };
 
   render() {
-    const { walkNumberSearch } = this.state;
+    const { walkNumberSearch, endOfWalks } = this.state;
 
     return (
       <div>
@@ -47,8 +48,8 @@ class Walks extends Component {
           {({ data, loading, fetchMore, refetch }) => {
             if (loading && isEmptyObject(data)) {
               return (
-                <Grid item>
-                  <CircularProgress size={50} />;
+                <Grid container item justify="center">
+                  <CircularProgress />
                 </Grid>
               );
             }
@@ -131,46 +132,82 @@ class Walks extends Component {
                     color="primary"
                     style={{ maxWidth: 300, margin: '0 auto 2rem' }}
                     disabled={!walkNumberSearch.length}
-                    onClick={() =>
+                    onClick={() => {
                       refetch({
                         offset: 0,
                         limit: 3,
                         walkNumber: walkNumberSearch,
-                      })
-                    }
+                      });
+                    }}
                   >
                     Search
                   </Button>
-                  <Grid
-                    container
-                    spacing={16}
-                    justify="center"
-                    style={{ padding: '0 15px' }}
-                  >
-                    {walkCards}
-                    <br />
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="raised"
-                      color="primary"
-                      onClick={() => {
-                        fetchMore({
-                          variables: {
-                            offset: walks.length,
-                          },
-                          updateQuery: (prev, { fetchMoreResult }) => {
-                            if (!fetchMoreResult) return prev;
-                            return Object.assign({}, prev, {
-                              walks: [...prev.walks, ...fetchMoreResult.walks],
+                  {walks.length === 0 ? (
+                    <Fragment>
+                      <p>No walks found.</p>
+                      <Button
+                        variant="raised"
+                        color="primary"
+                        style={{ maxWidth: 300, margin: '0 auto 2rem' }}
+                        onClick={() => {
+                          this.setState({
+                            walkNumberSearch: '',
+                          });
+                          refetch({
+                            offset: 0,
+                            limit: 3,
+                            walkNumber: null,
+                          });
+                        }}
+                      >
+                        Show All Walks
+                      </Button>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <Grid
+                        container
+                        spacing={16}
+                        justify="center"
+                        style={{ padding: '0 15px' }}
+                      >
+                        {walkCards}
+                        <br />
+                      </Grid>
+                      <Grid item>
+                        <Button
+                          variant="raised"
+                          color="primary"
+                          // Hide 'Load More' button if no more walks to load
+                          style={endOfWalks ? { display: 'none' } : {}}
+                          onClick={() => {
+                            fetchMore({
+                              variables: {
+                                offset: walks.length,
+                              },
+                              updateQuery: (prev, { fetchMoreResult }) => {
+                                if (!fetchMoreResult) {
+                                  this.setState({ endOfWalks: true });
+                                  return prev;
+                                }
+                                if (fetchMoreResult.walks.length < 3) {
+                                  this.setState({ endOfWalks: true });
+                                }
+                                return Object.assign({}, prev, {
+                                  walks: [
+                                    ...prev.walks,
+                                    ...fetchMoreResult.walks,
+                                  ],
+                                });
+                              },
                             });
-                          },
-                        });
-                      }}
-                    >
-                      Load More
-                    </Button>
-                  </Grid>
+                          }}
+                        >
+                          Load More
+                        </Button>
+                      </Grid>
+                    </Fragment>
+                  )}
                 </Grid>
               );
             }

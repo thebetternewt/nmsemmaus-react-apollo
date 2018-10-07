@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Container from '../common/ContentContainer';
 import styled from 'styled-components';
+import Container from '../common/ContentContainer';
 
-// import logo from '../../images/logos/gcp-logo-white.png';
 import logo from '../../images/WalktoEmmaus-Logo-white-text.png';
 
 const FooterWrapper = styled.div`

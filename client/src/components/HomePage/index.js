@@ -68,7 +68,6 @@ export default () => (
       )}
     </Hero>
     <Section>
-      {/* <Container width={'900px'}> */}
       <Grid
         container
         justify="center"

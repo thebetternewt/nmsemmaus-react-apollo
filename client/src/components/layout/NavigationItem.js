@@ -5,17 +5,20 @@ import PropTypes from 'prop-types';
 
 import { YELLOW } from '../UI/colors';
 
-const NavigationItem = props => (
-  <NavItem>
-    <NavigationLink exact to={props.link}>
-      {props.children}
-    </NavigationLink>
-  </NavItem>
-);
+const NavigationItem = props => {
+  const { link, children } = props;
+  return (
+    <NavItem>
+      <NavigationLink exact to={link}>
+        {children}
+      </NavigationLink>
+    </NavItem>
+  );
+};
 
 NavigationItem.propTypes = {
   link: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default NavigationItem;
@@ -38,7 +41,7 @@ const NavigationLink = styled(NavLink)`
   padding: 0 30px;
   position: relative;
   width: 100%;
-  text-transform: uppercase;
+  text-transform: capitalize;
 
   &:after {
     background-color: ${YELLOW};
@@ -79,8 +82,16 @@ const NavigationLink = styled(NavLink)`
       width: 0;
     }
     &.active {
-      background-color: transparent;
+      background-color: rgba(255, 255, 255, 0.2);
       &:after {
+        height: 5px;
+        width: 100%;
+      }
+    }
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      &:after {
+        background-color: #fff;
         height: 5px;
         width: 100%;
       }

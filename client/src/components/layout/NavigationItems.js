@@ -9,14 +9,14 @@ import NavigationItem from './NavigationItem';
 
 const NavigationItems = () => (
   <Nav>
-    <NavigationItem link="/">Home</NavigationItem>
+    {/* <NavigationItem link="/">Home</NavigationItem> */}
     {isAuthenticated() ? (
       <Fragment>
         <NavigationItem link="/news">News</NavigationItem>
+        <NavigationItem link="/sponsorship">Sponsorship</NavigationItem>
         <NavigationItem link="/pilgrim-lists">Pilgrim Lists</NavigationItem>
         <NavigationItem link="/board">Board</NavigationItem>
-        <NavigationItem link="/applications">Applications</NavigationItem>
-        <NavigationItem link="/sponsorship">Sponsorship</NavigationItem>
+        <NavigationItem link="/forms">Forms</NavigationItem>
         <NavigationItem link="/admin/walks">Admin</NavigationItem>
         <LoginButton
           color="secondary"

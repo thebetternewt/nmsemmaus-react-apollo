@@ -6,32 +6,32 @@ import SideDrawer from './SideDrawer';
 import Footer from './Footer';
 
 class Layout extends Component {
-  static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired
-  };
-
   state = {
-    sideDrawerOpen: false
+    sideDrawerOpen: false,
   };
 
   toggleSideDrawer = () => {
-    this.setState({ sideDrawerOpen: !this.state.sideDrawerOpen });
+    const { sideDrawerOpen } = this.state;
+    this.setState({ sideDrawerOpen: !sideDrawerOpen });
   };
 
   render() {
+    const { sideDrawerOpen } = this.state;
+    const { children } = this.props;
     return (
       <LayoutContainer>
         <Header toggleSideDrawer={this.toggleSideDrawer} />
-        <SideDrawer
-          toggle={this.toggleSideDrawer}
-          open={this.state.sideDrawerOpen}
-        />
-        <LayoutBody>{this.props.children}</LayoutBody>
+        <SideDrawer toggle={this.toggleSideDrawer} open={sideDrawerOpen} />
+        <LayoutBody>{children}</LayoutBody>
         <Footer />
       </LayoutContainer>
     );
   }
 }
+
+Layout.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+};
 
 export default Layout;
 
